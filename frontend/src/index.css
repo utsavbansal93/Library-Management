@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary (The Ink) */
+  --color-primary: #061b0e;
+  --color-primary-container: #1b3022;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #819986;
+  --color-primary-fixed: #d0e9d4;
+  --color-primary-fixed-dim: #b4cdb8;
+  --color-on-primary-fixed: #0b2013;
+  --color-on-primary-fixed-variant: #364c3c;
+  --color-inverse-primary: #b4cdb8;
+
+  /* Secondary (Slate) */
+  --color-secondary: #4e6073;
+  --color-secondary-container: #cfe2f9;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #526478;
+  --color-secondary-fixed: #d1e4fb;
+  --color-secondary-fixed-dim: #b5c8df;
+  --color-on-secondary-fixed: #091d2e;
+  --color-on-secondary-fixed-variant: #36485b;
+
+  /* Tertiary (Gilding/Gold) */
+  --color-tertiary: #1f1500;
+  --color-tertiary-container: #382900;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #ac8f47;
+  --color-tertiary-fixed: #ffdf97;
+  --color-tertiary-fixed-dim: #e4c375;
+  --color-on-tertiary-fixed: #251a00;
+  --color-on-tertiary-fixed-variant: #5a4300;
+
+  /* Surfaces (The Parchment) */
+  --color-surface: #fbf9f4;
+  --color-surface-bright: #fbf9f4;
+  --color-surface-container: #f0eee9;
+  --color-surface-container-low: #f5f3ee;
+  --color-surface-container-high: #eae8e3;
+  --color-surface-container-highest: #e4e2dd;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-dim: #dbdad5;
+  --color-surface-variant: #e4e2dd;
+  --color-on-surface: #1b1c19;
+  --color-on-surface-variant: #434843;
+  --color-background: #fbf9f4;
+  --color-on-background: #1b1c19;
+
+  /* Error & Utility */
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-outline: #737973;
+  --color-outline-variant: #c3c8c1;
+
+  /* Special */
+  --color-surface-tint: #4d6453;
+  --color-inverse-surface: #30312e;
+  --color-inverse-on-surface: #f2f1ec;
+
+  /* Typography */
+  --font-headline: 'Newsreader', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-label: 'Manrope', sans-serif;
+
+  /* Border Radius */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+/* Base reset */
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  background: #fbf9f4;
+  color: #1b1c19;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+/* Scrollbar hiding utility */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; }
+
+/* Glass navigation */
+.glass-nav {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Material Symbols config */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* Selection colors */
+::selection {
+  background-color: #e4c375;
+  color: #382900;
+}

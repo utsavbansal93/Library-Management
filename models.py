@@ -256,6 +256,7 @@ class Work(Base):
     goodreads_url = Column(Text, nullable=True)
     comicvine_url = Column(Text, nullable=True)
     notes = Column(Text, nullable=True)
+    deleted_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -331,8 +332,10 @@ class Artifact(Base):
     main_genre = Column(Text, nullable=True)
     sous_genre = Column(Text, nullable=True)
     goodreads_url = Column(Text, nullable=True)
+    cover_image_path = Column(Text, nullable=True)
     notes = Column(Text, nullable=True)
     source_sheet = Column(String(30), nullable=True)  # track which xlsx sheet this came from
+    deleted_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
