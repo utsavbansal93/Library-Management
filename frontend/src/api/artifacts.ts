@@ -1,7 +1,7 @@
 import { get, post, put, del } from './client';
 import type {
-  ArtifactSummary, ArtifactDetail, ArtifactCreate, ArtifactUpdate,
-  CopyCreate, CopyDetail,
+  ArtifactDetail, ArtifactCreate, ArtifactUpdate,
+  PaginatedArtifacts, CopyCreate, CopyDetail,
 } from '../types';
 
 export interface ArtifactListParams {
@@ -10,11 +10,12 @@ export interface ArtifactListParams {
   location?: string;
   owner?: string;
   q?: string;
-  skip?: number;
+  sort?: string;
+  offset?: number;
   limit?: number;
 }
 
-export function listArtifacts(params?: ArtifactListParams): Promise<ArtifactSummary[]> {
+export function listArtifacts(params?: ArtifactListParams): Promise<PaginatedArtifacts> {
   const sp = new URLSearchParams();
   if (params) {
     Object.entries(params).forEach(([k, v]) => {
@@ -22,7 +23,7 @@ export function listArtifacts(params?: ArtifactListParams): Promise<ArtifactSumm
     });
   }
   const qs = sp.toString();
-  return get<ArtifactSummary[]>(`/artifacts${qs ? `?${qs}` : ''}`);
+  return get<PaginatedArtifacts>(`/artifacts${qs ? `?${qs}` : ''}`);
 }
 
 export function getArtifact(id: string): Promise<ArtifactDetail> {

@@ -16,19 +16,27 @@ def test_create_artifact(client):
 def test_list_artifacts(client, seed_dual_story_artifact):
     resp = client.get("/api/artifacts")
     assert resp.status_code == 200
-    assert len(resp.json()) >= 1
+    data = resp.json()
+    assert "items" in data
+    assert "total" in data
+    assert data["total"] >= 1
+    assert len(data["items"]) >= 1
 
 
 def test_filter_by_format(client, seed_dual_story_artifact):
     resp = client.get("/api/artifacts", params={"format": "Comic Issue"})
     assert resp.status_code == 200
-    assert len(resp.json()) == 1
+    data = resp.json()
+    assert data["total"] == 1
+    assert len(data["items"]) == 1
 
 
 def test_search_artifacts(client, seed_dual_story_artifact):
     resp = client.get("/api/artifacts", params={"q": "dual-story"})
     assert resp.status_code == 200
-    assert len(resp.json()) == 1
+    data = resp.json()
+    assert data["total"] == 1
+    assert len(data["items"]) == 1
 
 
 def test_dual_story_artifact_retrieval(client, seed_dual_story_artifact):

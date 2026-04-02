@@ -14,7 +14,7 @@ from models import Artifact, ArtifactWork, Copy, CreatorRole, TargetType, _uuid
 BASE_DIR = Path(__file__).resolve().parent.parent
 from schemas.artifacts import (
     ArtifactCreate, ArtifactUpdate, ArtifactSummary, ArtifactDetail,
-    CopyCreate, CopyDetail,
+    PaginatedArtifacts, CopyCreate, CopyDetail,
 )
 from schemas.common import CreatorRoleBrief
 
@@ -38,14 +38,15 @@ def _get_artifact_creators(db: Session, artifact_id: str) -> List[dict]:
     ]
 
 
-@router.get("/artifacts", response_model=List[ArtifactSummary])
+@router.get("/artifacts", response_model=PaginatedArtifacts)
 def list_artifacts(
     format: Optional[str] = Query(None),
     publisher: Optional[str] = Query(None),
     location: Optional[str] = Query(None),
     owner: Optional[str] = Query(None),
     q: Optional[str] = Query(None),
-    limit: int = Query(200, le=500),
+    sort: Optional[str] = Query("title"),
+    limit: int = Query(20, le=500),
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
 ):
@@ -60,11 +61,25 @@ def list_artifacts(
         query = query.join(Copy).filter(Copy.location == location)
     if q:
         query = query.filter(Artifact.title.ilike(f"%{q}%"))
-    return (
+
+    total = query.count()
+
+    sort_map = {
+        "title": Artifact.title.asc(),
+        "date_added": Artifact.date_added.desc().nullslast(),
+        "edition_year": Artifact.edition_year.desc().nullslast(),
+    }
+    order = sort_map.get(sort, Artifact.title.asc())
+
+    items = (
         query.options(joinedload(Artifact.volume_run))
-        .order_by(Artifact.title)
+        .order_by(order)
         .offset(offset).limit(limit)
         .all()
+    )
+    return PaginatedArtifacts(
+        items=[ArtifactSummary.model_validate(a) for a in items],
+        total=total,
     )
 
 

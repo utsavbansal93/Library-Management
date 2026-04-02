@@ -5,8 +5,6 @@ interface PaginationProps {
 }
 
 export default function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
-  if (totalPages <= 1) return null;
-
   // Build visible page numbers: always show first, last, current, and neighbors
   function getVisiblePages(): (number | 'ellipsis')[] {
     const pages: (number | 'ellipsis')[] = [];

@@ -145,6 +145,11 @@ export interface ArtifactSummary {
   volume_run?: VolumeRunBrief | null;
 }
 
+export interface PaginatedArtifacts {
+  items: ArtifactSummary[];
+  total: number;
+}
+
 export interface ArtifactDetail {
   artifact_id: string;
   title: string;

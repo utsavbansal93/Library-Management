@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getArtifact, updateArtifact, deleteArtifact, coverUrl } from '../api/artifacts';
 import type { ArtifactUpdate } from '../types';
-import { ARTIFACT_FORMATS, LOCATIONS } from '../types';
+import { ARTIFACT_FORMATS, OWNERS } from '../types';
 import { cn, formatRoleLabel } from '../lib/utils';
 import CoverImage from '../components/shared/CoverImage';
 import FormatBadge from '../components/shared/FormatBadge';
@@ -283,26 +283,7 @@ export default function ArtifactDetail() {
         <section className="grid grid-cols-2 gap-4">
           <MetadataCell
             label="Location"
-            value={
-              isEditing ? (
-                <select
-                  value={editData.owner ?? artifact.owner ?? ''}
-                  onChange={(e) =>
-                    setEditData((d) => ({ ...d, owner: e.target.value }))
-                  }
-                  className="mt-1 rounded-lg bg-surface-container-low px-2 py-1 font-headline text-xl text-primary focus:outline-none"
-                >
-                  <option value="">--</option>
-                  {LOCATIONS.map((loc) => (
-                    <option key={loc} value={loc}>
-                      {loc}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                artifact.copies[0]?.location ?? 'Not set'
-              )
-            }
+            value={artifact.copies[0]?.location ?? 'Not set'}
           />
           <MetadataCell
             label="Condition"
@@ -328,7 +309,25 @@ export default function ArtifactDetail() {
           />
           <MetadataCell
             label="Owner"
-            value={artifact.owner ?? 'Unknown'}
+            value={
+              isEditing ? (
+                <select
+                  value={editData.owner ?? artifact.owner ?? ''}
+                  onChange={(e) =>
+                    setEditData((d) => ({ ...d, owner: e.target.value }))
+                  }
+                  className="mt-1 rounded-lg bg-surface-container-low px-2 py-1 font-headline text-xl text-primary focus:outline-none"
+                >
+                  {OWNERS.map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                artifact.owner ?? 'Unknown'
+              )
+            }
           />
         </section>
 
@@ -494,26 +493,31 @@ export default function ArtifactDetail() {
 
           {dangerExpanded && (
             <div className="mt-4 space-y-4 rounded-2xl bg-error-container/20 p-6">
-              {/* Pirated toggle: only show when is_pirated is true */}
-              {artifact.is_pirated && (
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-body text-sm font-semibold text-on-surface">
-                      Pirated Copy
-                    </p>
-                    <p className="font-body text-xs text-on-surface-variant">
-                      This artifact is flagged as a pirated copy.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => pirateMutation.mutate(false)}
-                    disabled={pirateMutation.isPending}
-                    className="rounded-full bg-error px-4 py-2 font-label text-xs font-bold text-on-error disabled:opacity-50"
-                  >
-                    Remove Flag
-                  </button>
+              {/* Pirated toggle */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-body text-sm font-semibold text-on-surface">
+                    {artifact.is_pirated ? 'Pirated Copy' : 'Pirated Flag'}
+                  </p>
+                  <p className="font-body text-xs text-on-surface-variant">
+                    {artifact.is_pirated
+                      ? 'This artifact is flagged as a pirated copy.'
+                      : 'Flag this artifact as a pirated copy.'}
+                  </p>
                 </div>
-              )}
+                <button
+                  onClick={() => pirateMutation.mutate(!artifact.is_pirated)}
+                  disabled={pirateMutation.isPending}
+                  className={cn(
+                    'rounded-full px-4 py-2 font-label text-xs font-bold disabled:opacity-50',
+                    artifact.is_pirated
+                      ? 'bg-error text-on-error'
+                      : 'bg-surface-container-highest text-on-surface',
+                  )}
+                >
+                  {artifact.is_pirated ? 'Remove Flag' : 'Flag as Pirated'}
+                </button>
+              </div>
 
               {/* Delete */}
               <div className="flex items-center justify-between">

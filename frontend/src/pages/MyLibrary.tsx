@@ -30,6 +30,21 @@ export default function MyLibrary() {
   const sort = (searchParams.get('sort') as SortOption) ?? 'title';
   const page = parseInt(searchParams.get('page') ?? '1', 10);
 
+  // Debounced search: local input state syncs to URL after 300ms
+  const [searchText, setSearchText] = useState(q);
+  useEffect(() => {
+    setSearchText(q);
+  }, [q]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchText !== q) {
+        updateParam('q', searchText);
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchText]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Persist view mode
   useEffect(() => {
     localStorage.setItem(VIEW_STORAGE_KEY, viewMode);
@@ -38,12 +53,13 @@ export default function MyLibrary() {
   const params: ArtifactListParams = {
     format: format,
     q: q || undefined,
-    skip: (page - 1) * PER_PAGE,
+    sort,
+    offset: (page - 1) * PER_PAGE,
     limit: PER_PAGE,
   };
 
   const {
-    data: artifacts,
+    data,
     isLoading,
     isError,
     error,
@@ -52,20 +68,8 @@ export default function MyLibrary() {
     queryFn: () => listArtifacts(params),
   });
 
-  // Client-side sort (API may not support all sort fields)
-  const sorted = [...(artifacts ?? [])].sort((a, b) => {
-    switch (sort) {
-      case 'date_added':
-        return 0; // Relies on API default order
-      case 'edition_year':
-        return 0; // Summary doesn't include edition_year; keep API order
-      case 'title':
-      default:
-        return a.title.localeCompare(b.title);
-    }
-  });
-
-  const totalItems = sorted.length;
+  const items = data?.items ?? [];
+  const totalItems = data?.total ?? 0;
   const totalPages = Math.max(1, Math.ceil(totalItems / PER_PAGE));
 
   function updateParam(key: string, value: string) {
@@ -99,8 +103,8 @@ export default function MyLibrary() {
           <input
             type="text"
             placeholder="Search by title, publisher..."
-            value={q}
-            onChange={(e) => updateParam('q', e.target.value)}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
             className="w-full rounded-xl bg-surface-container-low px-4 py-3 pl-10 font-body text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30"
           />
           <svg
@@ -141,7 +145,7 @@ export default function MyLibrary() {
               : 'flex flex-col gap-2',
           )}
         >
-          {Array.from({ length: 10 }).map((_, i) => (
+          {Array.from({ length: PER_PAGE }).map((_, i) => (
             <div
               key={i}
               className={cn(
@@ -162,7 +166,7 @@ export default function MyLibrary() {
         </div>
       )}
 
-      {!isLoading && !isError && sorted.length === 0 && (
+      {!isLoading && !isError && items.length === 0 && (
         <EmptyState
           icon="search_off"
           title="No artifacts found"
@@ -174,11 +178,11 @@ export default function MyLibrary() {
         />
       )}
 
-      {!isLoading && !isError && sorted.length > 0 && (
+      {!isLoading && !isError && items.length > 0 && (
         <>
           {viewMode === 'grid' ? (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {sorted.map((artifact) => (
+              {items.map((artifact) => (
                 <ArtifactCard key={artifact.artifact_id} artifact={artifact} />
               ))}
             </div>
@@ -210,7 +214,7 @@ export default function MyLibrary() {
                   </tr>
                 </thead>
                 <tbody>
-                  {sorted.map((artifact) => (
+                  {items.map((artifact) => (
                     <ArtifactListRow
                       key={artifact.artifact_id}
                       artifact={artifact}
@@ -222,15 +226,13 @@ export default function MyLibrary() {
           )}
 
           {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="mt-8 flex justify-center">
-              <Pagination
-                page={page}
-                totalPages={totalPages}
-                onPageChange={(p: number) => updateParam('page', String(p))}
-              />
-            </div>
-          )}
+          <div className="mt-8 flex justify-center">
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onPageChange={(p: number) => updateParam('page', String(p))}
+            />
+          </div>
         </>
       )}
     </div>

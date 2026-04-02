@@ -62,6 +62,11 @@ class ArtifactSummary(OrmBase):
     volume_run: Optional[VolumeRunBrief] = None
 
 
+class PaginatedArtifacts(BaseModel):
+    items: List[ArtifactSummary]
+    total: int
+
+
 class ArtifactDetail(OrmBase):
     artifact_id: str
     title: str
