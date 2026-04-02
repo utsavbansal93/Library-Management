@@ -1,0 +1,2969 @@
+{
+  "metadata": {
+    "generated_at": "2026-04-02T12:47:36.323829",
+    "description": "Curated sample data from Utskomia Library migration for UI prototyping"
+  },
+  "artifacts": [
+    {
+      "artifact_id": "2b8ff186-701a-4d29-8999-ddd646a7be27",
+      "title": "Half A King",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "9780007550227",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "SFF",
+      "sous_genre": "YA",
+      "goodreads_url": "https://www.goodreads.com/book/show/24714927-half-a-king",
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "b8c2aa2a-df3f-411d-838a-c9f2e39c31fa",
+          "title": "Half A King",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "fd30e5e0-c72c-4516-84d1-d2160d7571e4",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "e651eed8-0e32-49b6-86e9-98df94fd11f1",
+      "title": "Half The World",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "9780007550258",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "SFF",
+      "sous_genre": "YA",
+      "goodreads_url": "https://www.goodreads.com/book/show/25744617-half-the-world",
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "323e0d4b-a797-4cab-977c-6bf50f3a46cb",
+          "title": "Half The World",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "67288d4e-b1d6-4d09-8d6b-44fb437386db",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "ace8940e-beaa-4423-8a91-2ecef665e476",
+      "title": "Half A War",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "9780007550289",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "SFF",
+      "sous_genre": "YA",
+      "goodreads_url": "https://www.goodreads.com/book/show/28924910-half-a-war",
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "25ba74a4-fa89-4214-af3c-3e2dcf761393",
+          "title": "Half A War",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "36306d66-a95f-4e1b-a7ba-25a584011482",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "6873c7cc-2304-4c3b-9970-9022a7fb8173",
+      "title": "Dark Apprentice",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "0553297996",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "SFF",
+      "sous_genre": "Space",
+      "goodreads_url": "https://www.goodreads.com/book/show/760111.Dark_Apprentice",
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "cdc54bdd-8855-4fe0-80e8-b5e1cae537e3",
+          "title": "Dark Apprentice",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "f527ebed-8b01-49d9-9dd8-cae458b6552c",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "57de2b26-12cf-4747-a7d6-0232ca2c118b",
+      "title": "Honour Among Thieves/Kane And Abel",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "0330440896",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "Drama",
+      "sous_genre": "Thriller",
+      "goodreads_url": "https://www.goodreads.com/book/show/157159.Honour_Among_Thieves_Kane_And_Abel",
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "6edb403b-f4be-472c-862e-c70706d7debb",
+          "title": "Honour Among Thieves/Kane And Abel",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "c7ba4071-1579-49e2-9d84-4886c27ade19",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "111be669-4256-4c28-b9ef-98095e1cdcb0",
+      "title": "A Quiver Full of Arrows",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "0340272724",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "Drama",
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "fbc4845d-2b30-4b35-83d1-5d085c11e6ee",
+          "title": "A Quiver Full of Arrows",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "3f3d1575-975a-4509-a3e7-37d5e8f86957",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "3dcffc6b-27ff-4136-abc6-e4e4b7ce5e6e",
+      "title": "The Fourth Estate",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "0006496458",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "Drama",
+      "sous_genre": "Drama",
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "98b9b034-1a6e-4056-bfea-64d18a6a199c",
+          "title": "The Fourth Estate",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "cb11addd-8eb2-4062-ab6c-82eb780fffef",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "f792527e-2760-40e0-9964-4ca22fe5e6a0",
+      "title": "Forward the Foundation",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "0553565079",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": "SFF",
+      "sous_genre": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/76679.Forward_the_Foundation",
+      "notes": null,
+      "source_sheet": "Novels",
+      "works": [
+        {
+          "work_id": "edda7fea-275f-4d93-92f6-ae3cdbb6bf54",
+          "title": "Forward the Foundation",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "62e18b3f-aaac-4ea8-8ce7-cbe71fe66f2b",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "c264ca4b-5fe4-4bce-8b1b-6d8a3fddd068",
+      "title": "Building Strong Brands",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "9781849830409",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/10834742-building-strong-brands",
+      "notes": null,
+      "source_sheet": "Non-fiction",
+      "works": [
+        {
+          "work_id": "f36957d7-a1f7-47dd-a62c-eb7916944113",
+          "title": "Building Strong Brands",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "17e1d79e-9323-40cb-9339-51a4519a6663",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "02f30b65-336c-44b8-b91b-fab2cea369f5",
+      "title": "Philosophy of Hinduism",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "9788189524593",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/216223893-philosophy-of-hinduism",
+      "notes": null,
+      "source_sheet": "Non-fiction",
+      "works": [
+        {
+          "work_id": "dde4bef3-d32e-4ae7-b3a8-262f0444cb73",
+          "title": "Philosophy of Hinduism",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "20d8c418-367d-4227-87b4-52e529ef1db8",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "1c0f3e70-fcdf-43c1-908f-1d79b150be6b",
+      "title": "Glimpses on the History of Tibet",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "9789380091365",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Non-fiction",
+      "works": [
+        {
+          "work_id": "f368f03d-d6e5-477f-b3b8-79d63db8b226",
+          "title": "Glimpses on the History of Tibet",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "e81b6b5a-bb5b-40cc-898c-9c4b108a8ae2",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "e9205311-9a3e-4696-8d15-6545187dffa0",
+      "title": "A\u0304o, ham\u0310se eka sa\u0304tha",
+      "format": "Paperback",
+      "publisher": null,
+      "edition_year": null,
+      "isbn_or_upc": "8123720122",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Hindi Books",
+      "works": [
+        {
+          "work_id": "00a38acd-369d-4bea-b6a4-ce13e9fc14a2",
+          "title": "A\u0304o, ham\u0310se eka sa\u0304tha",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "83905c25-cfeb-46b9-bf79-554f117795ff",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "79a3aacb-f441-4660-b370-9be3e172ff44",
+      "title": "The Caravan #4",
+      "format": "Magazine",
+      "publisher": "Delhi Press",
+      "edition_year": 2022,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "4",
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": "S. no: MG001; Volume: 14",
+      "source_sheet": "Magazines",
+      "works": [
+        {
+          "work_id": "c07c1ec2-df03-423e-91eb-5ccdfd05b95c",
+          "title": "Nirmala Sitharaman",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "0891e05b-d388-4bd2-bec0-ec2a3f06de3f",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "9d466954-9060-4795-bc1d-c9c66e1175e4",
+      "title": "The Caravan #6",
+      "format": "Magazine",
+      "publisher": "Delhi Press",
+      "edition_year": 2022,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "6",
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": "S. no: MG002; Volume: 14",
+      "source_sheet": "Magazines",
+      "works": [
+        {
+          "work_id": "62abfd6c-1a5d-4050-a8a0-6cfeb4fca8a5",
+          "title": "Warrior Queen",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "739fa566-6322-4d4c-ad86-970862055b75",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "a91c3032-47a2-481b-83fa-46a7f71c8a79",
+      "title": "The Essential Angry Maushi",
+      "format": "Graphic Novel",
+      "publisher": "Abhijeet Kini Studios",
+      "edition_year": null,
+      "isbn_or_upc": "9789334005158",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (GNs)",
+      "works": [
+        {
+          "work_id": "e0eb5c20-2af8-445a-ba63-4cffa61f8e18",
+          "title": "Angry Maushi #1",
+          "position": 1,
+          "is_partial": false
+        },
+        {
+          "work_id": "f0a24cf8-752d-4558-8ac3-6039d5c58c46",
+          "title": "Angry Maushi #2",
+          "position": 2,
+          "is_partial": false
+        },
+        {
+          "work_id": "75dbf9b2-11cb-43c1-b054-8b064dd0da7a",
+          "title": "Angry Maushi #3",
+          "position": 3,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "3ae99932-150e-4967-91b2-a75d231dec92",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "e889fe0f-6895-4014-89bf-0e329ca175ba",
+      "title": "Tulsidas' Ramayana",
+      "format": "Graphic Novel",
+      "publisher": "ACK Media",
+      "edition_year": null,
+      "isbn_or_upc": "9789385874727",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": null,
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": "Not on Goodreads",
+      "notes": null,
+      "source_sheet": "Comics (GNs)",
+      "works": [
+        {
+          "work_id": "994c9bd2-48f9-4879-a291-e747631e6409",
+          "title": "Tulsidas' Ramayana",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "2aab3d73-e7c0-45d3-bc5d-6961d0d32857",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "69b2d232-edd6-494e-b742-4e4e1b396e6f",
+      "title": "Archie: The New Riverdale",
+      "format": "Graphic Novel",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": "9781627388672",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/25852959-archie-vol-1?ref=nav_sb_ss_1_13",
+      "notes": null,
+      "source_sheet": "Comics (GNs)",
+      "works": [
+        {
+          "work_id": "e1f7364c-b7c8-4087-a145-23428efc7907",
+          "title": "Archie (2015) #1",
+          "position": 1,
+          "is_partial": false
+        },
+        {
+          "work_id": "c483ff55-00ce-46d8-bb66-0b1754999a27",
+          "title": "Archie (2015) #2",
+          "position": 2,
+          "is_partial": false
+        },
+        {
+          "work_id": "bf5bbee6-0f18-4184-af7d-c2a6c6b944de",
+          "title": "Archie (2015) #3",
+          "position": 3,
+          "is_partial": false
+        },
+        {
+          "work_id": "687d06ee-d3a9-4780-9b3b-9cda79fe1f5d",
+          "title": "Archie (2015) #4",
+          "position": 4,
+          "is_partial": false
+        },
+        {
+          "work_id": "552723aa-83f8-4e1d-b3b6-2c2ec544c65b",
+          "title": "Archie (2015) #5",
+          "position": 5,
+          "is_partial": false
+        },
+        {
+          "work_id": "337180cd-4b70-4fd6-b767-7f4f1638983c",
+          "title": "Archie (2015) #6",
+          "position": 6,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "4ba4540f-44d1-4d84-85ab-4e00070de679",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "aba19ee5-01c7-4d68-bcbc-2bde994ad049",
+      "title": "Lumberjanes: Beware the Kitten Holy",
+      "format": "Graphic Novel",
+      "publisher": "Boom!",
+      "edition_year": null,
+      "isbn_or_upc": "9781608866878",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": "Lumberjanes, Vol. 1: Beware the Kitten Holy by N.D. Stevenson | Goodreads",
+      "notes": null,
+      "source_sheet": "Comics (GNs)",
+      "works": [
+        {
+          "work_id": "b0d794b7-feb2-4e31-a263-d4a5e891adda",
+          "title": "Lumberjanes #1",
+          "position": 1,
+          "is_partial": false
+        },
+        {
+          "work_id": "06609cca-245b-4675-975d-6b2da4011fdc",
+          "title": "Lumberjanes #2",
+          "position": 2,
+          "is_partial": false
+        },
+        {
+          "work_id": "9cbb1088-4fdf-45f1-b186-e0f066b87435",
+          "title": "Lumberjanes #3",
+          "position": 3,
+          "is_partial": false
+        },
+        {
+          "work_id": "3b84d1b9-e187-4399-892a-720e85f7f976",
+          "title": "Lumberjanes #4",
+          "position": 4,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "05a8e259-31b2-4f70-bb7b-016c9ae946f3",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "95261097-a36d-4885-86b1-f2c00cc97f24",
+      "title": "Hellboy in Hell: The Descent",
+      "format": "Graphic Novel",
+      "publisher": "Dark Horse Comics",
+      "edition_year": null,
+      "isbn_or_upc": "9781616554446",
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": "Hellboy in Hell, Vol. 1: The Descent by Mike Mignola | Goodreads",
+      "notes": null,
+      "source_sheet": "Comics (GNs)",
+      "works": [
+        {
+          "work_id": "4df1935f-cb0e-46c1-8d07-849e6e93d6c7",
+          "title": "Hellboy in Hell: The Descent #1",
+          "position": 1,
+          "is_partial": false
+        },
+        {
+          "work_id": "fd76b031-bcfb-4263-8ae4-3cff20919b73",
+          "title": "Hellboy in Hell: The Descent #2",
+          "position": 2,
+          "is_partial": false
+        },
+        {
+          "work_id": "78c703a8-428d-41ea-8076-73322e956b26",
+          "title": "Hellboy in Hell: The Descent #3",
+          "position": 3,
+          "is_partial": false
+        },
+        {
+          "work_id": "cb69dc55-a494-4e84-947a-f18597eaa080",
+          "title": "Hellboy in Hell: The Descent #4",
+          "position": 4,
+          "is_partial": false
+        },
+        {
+          "work_id": "85fc44c8-b2cc-442c-bbd9-377ea16d8f4f",
+          "title": "Hellboy in Hell: The Descent #5",
+          "position": 5,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "6aee6932-1cb9-4b09-9323-1b68518e9e42",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "7e1b4214-9f25-45e6-b0c4-74e2807bece0",
+      "title": "Tinkle #572",
+      "format": "Comic Issue",
+      "publisher": "ACK Media",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "572",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "9ede922f-89d2-4f7e-a836-52a604e0136b",
+          "title": "Tinkle #572",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "aa59a970-9422-4e11-af9f-8653284c6867",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "e23c8d21-71e6-4fef-8dc7-250b3dd4a910",
+      "title": "Tinkle Double Digest #147",
+      "format": "Comic Issue",
+      "publisher": "ACK Media",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "147",
+      "size": "Small",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "d43f0879-163e-42a6-8f4a-ff9133fcf2ac",
+          "title": "Tinkle Double Digest #147",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "bbedaad1-beb3-4d0b-8ed5-7de728d7e844",
+          "location": "Small Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "0b24dfc8-1bb5-4fc8-801b-0f48ea5bd124",
+      "title": "Batman #7",
+      "format": "Comic Issue",
+      "publisher": "Americom",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": true,
+      "original_publisher": "DC Comics",
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "7",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "61cf46d9-3111-4f00-b2b6-ff90a0bafba4",
+          "title": "Batman #455",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "e21b8b06-d6be-44b2-a053-6bb6eaf3cacb",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "d37d9cb2-2a6b-4f7f-86c3-a2da8643d7d0",
+      "title": "Batman #8",
+      "format": "Comic Issue",
+      "publisher": "Americom",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": true,
+      "original_publisher": "DC Comics",
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "8",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "7db59a8a-ea79-4a65-a47a-e39f0736ff9a",
+          "title": "Batman #456",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "8187d3d7-a0af-40af-ad34-c901a98995e8",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "350c8708-6760-44e9-90a1-09b4abf6dd07",
+      "title": "Batman #9",
+      "format": "Comic Issue",
+      "publisher": "Americom",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": true,
+      "original_publisher": "DC Comics",
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "9",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "51821014-d129-4a86-86fe-8a1fc1e2cbdf",
+          "title": "Batman #457",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "323eb6cb-def1-4c0c-8928-36e4f27b00cf",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "8c4dac20-2319-4d1f-979e-1942c76b7c42",
+      "title": "Archie #504",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "504",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "e6b579f8-311c-48f2-afa1-9715f1534d03",
+          "title": "Archie #504",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "6f4f1329-ea0d-44a4-a47c-d8b6439401bb",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "024f339c-2131-4166-84e4-178d3e48b919",
+      "title": "Archie #515",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "515",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "929ab2ed-43f9-45bc-a722-29f8deead7aa",
+          "title": "Archie #515",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "7d49a87c-dd7f-47b2-b2f2-77f3808f774e",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "e985f34e-0f26-4a7b-af4d-50d6092ba847",
+      "title": "Archie & Friends #66",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "66",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "7f36ec9f-777d-4792-8f8e-ff155626f859",
+          "title": "Archie & Friends #66",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "23e962ef-066f-496b-9349-45bfd0e44982",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "3702351e-bb25-4916-ba1f-5afbfbc27a13",
+      "title": "Archie's Double Digest #123",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "123",
+      "size": "Small",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "edf4d7f2-21b7-413c-99ea-0e7220e20a73",
+          "title": "Archie's Double Digest #123",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "5dc5fc31-d66a-4ab4-9b40-43c64e431356",
+          "location": "Small Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "5087dbbb-1663-42c9-87cf-dd002da36f20",
+      "title": "Archie's Story & Game #16",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "16",
+      "size": "Small",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "45158730-498b-4839-a919-525b91911ce0",
+          "title": "Archie's Story & Game #16",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "f9578672-220f-4b98-b9c7-20765b08b70e",
+          "location": "Small Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "aa73155e-e741-4f3a-a51b-e981ac9c7fa5",
+      "title": "Sabrina The Teenage Witch #13",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "13",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "c3e76d50-f6d3-4124-8b86-51027d03c732",
+          "title": "Sabrina The Teenage Witch #13",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "9356cfc2-ff5f-4cc8-881b-41302c6e6ef6",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "90f33f36-e6bd-4f71-82e8-cb57d2ffee85",
+      "title": "The Jetsons #1",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "d9567cb1-4004-4f79-aeb8-06ac5ad55558",
+          "title": "The Jetsons #1",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "3afa1027-9f32-456b-a976-81bcb9606179",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "a0ac7f28-1c3d-44bf-b00d-96ac14c6ff5b",
+      "title": "Your Pal Archie #1",
+      "format": "Comic Issue",
+      "publisher": "Archie Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": null,
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "73980dbf-2673-4897-bd7d-9f8a44fc090d",
+          "title": "Your Pal Archie #1",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "b01b53a5-4ed7-48a2-b78c-43ebaf3e10cd",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "587c9770-1412-4649-85a7-f19f7141927b",
+      "title": "Kachchhaman #1",
+      "format": "Comic Issue",
+      "publisher": "Besra Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "2d553682-942e-4540-ad1f-84e5e65a306b",
+          "title": "Kachchhaman #1",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "5c899f6a-ae33-4c48-a394-6290c3300359",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    },
+    {
+      "artifact_id": "618a647c-effe-4db0-afc8-7fe0ad07a017",
+      "title": "Captain Power and the Soldiers of The Future #1",
+      "format": "Comic Issue",
+      "publisher": "Continuity Comics",
+      "edition_year": null,
+      "isbn_or_upc": null,
+      "is_reprint": false,
+      "original_publisher": null,
+      "date_added": "2026-04-02",
+      "owner": "The Bansal Brothers",
+      "issue_number": "1",
+      "size": "Large",
+      "main_genre": null,
+      "sous_genre": null,
+      "goodreads_url": null,
+      "notes": null,
+      "source_sheet": "Comics (Issues)",
+      "works": [
+        {
+          "work_id": "22f8405e-5d0a-40a7-b4bd-95983fb88a16",
+          "title": "Captain Power and the Soldiers of The Future #1",
+          "position": 1,
+          "is_partial": false
+        }
+      ],
+      "copies": [
+        {
+          "copy_id": "a4958cf8-d6f9-4f37-8721-13f9237d459a",
+          "location": "Large Shelf",
+          "condition": null,
+          "borrower_name": null
+        }
+      ]
+    }
+  ],
+  "works": [
+    {
+      "work_id": "b8c2aa2a-df3f-411d-838a-c9f2e39c31fa",
+      "title": "Half A King",
+      "work_type": "Novel",
+      "original_publication_year": 2014,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/24714927-half-a-king",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "Shattered Sea",
+          "sequence_number": 1.0
+        }
+      ],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Joe Abercrombie",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "929ab2ed-43f9-45bc-a722-29f8deead7aa",
+      "title": "Archie #515",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "515",
+      "subject_tags": [
+        "Archie's"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Archie #515 (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "George Gladir",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Stan Goldberg",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "2d553682-942e-4540-ad1f-84e5e65a306b",
+      "title": "Kachchhaman #1",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "1",
+      "subject_tags": [
+        "Indian"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Kachchhaman by Surjeet Besra | Goodreads",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Kachchhaman",
+        "publisher": "Besra Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Surjeet Besra",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Shambhu Nath Mahto",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "cb69dc55-a494-4e84-947a-f18597eaa080",
+      "title": "Hellboy in Hell: The Descent #4",
+      "work_type": "Comic Story",
+      "original_publication_year": 2014,
+      "issue_number": "4",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Hellboy in Hell: The Descent",
+        "publisher": "Dark Horse Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mike Mignola",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dave Stewart",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "62abfd6c-1a5d-4050-a8a0-6cfeb4fca8a5",
+      "title": "Warrior Queen",
+      "work_type": "Magazine Issue",
+      "original_publication_year": 2022,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "The Caravan",
+          "sequence_number": 6.0
+        }
+      ],
+      "arcs": [],
+      "creators": [],
+      "reading_status": []
+    },
+    {
+      "work_id": "bf5bbee6-0f18-4184-af7d-c2a6c6b944de",
+      "title": "Archie (2015) #3",
+      "work_type": "Comic Story",
+      "original_publication_year": 2016,
+      "issue_number": "3",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie (2015)",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mark Waid",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Fiona Staples",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Annie Wu",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Veronica Fish",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "fd76b031-bcfb-4263-8ae4-3cff20919b73",
+      "title": "Hellboy in Hell: The Descent #2",
+      "work_type": "Comic Story",
+      "original_publication_year": 2014,
+      "issue_number": "2",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Hellboy in Hell: The Descent",
+        "publisher": "Dark Horse Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mike Mignola",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dave Stewart",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "687d06ee-d3a9-4780-9b3b-9cda79fe1f5d",
+      "title": "Archie (2015) #4",
+      "work_type": "Comic Story",
+      "original_publication_year": 2016,
+      "issue_number": "4",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie (2015)",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mark Waid",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Fiona Staples",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Annie Wu",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Veronica Fish",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "edda7fea-275f-4d93-92f6-ae3cdbb6bf54",
+      "title": "Forward the Foundation",
+      "work_type": "Novel",
+      "original_publication_year": 1993,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/76679.Forward_the_Foundation",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "Foundation",
+          "sequence_number": 0.2
+        }
+      ],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Isaac Asimov",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "d43f0879-163e-42a6-8f4a-ff9133fcf2ac",
+      "title": "Tinkle Double Digest #147",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "147",
+      "subject_tags": [
+        "Indian"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Tinkle Double Digest",
+        "publisher": "ACK Media"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Shriya Ghate",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Various",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "98b9b034-1a6e-4056-bfea-64d18a6a199c",
+      "title": "The Fourth Estate",
+      "work_type": "Novel",
+      "original_publication_year": 1996,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Jeffrey Archer",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "fbc4845d-2b30-4b35-83d1-5d085c11e6ee",
+      "title": "A Quiver Full of Arrows",
+      "work_type": "Novel",
+      "original_publication_year": 1980,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Jeffrey Archer",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "337180cd-4b70-4fd6-b767-7f4f1638983c",
+      "title": "Archie (2015) #6",
+      "work_type": "Comic Story",
+      "original_publication_year": 2016,
+      "issue_number": "6",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie (2015)",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mark Waid",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Fiona Staples",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Annie Wu",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Veronica Fish",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "73980dbf-2673-4897-bd7d-9f8a44fc090d",
+      "title": "Your Pal Archie #1",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "1",
+      "subject_tags": [
+        "Archie's"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Your Pal Archie #1 - The Road Worrier / A Night at the Opera / Sand-Wishes! (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Your Pal Archie",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Ty Templeton",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dan Parent",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "f36957d7-a1f7-47dd-a62c-eb7916944113",
+      "title": "Building Strong Brands",
+      "work_type": "Non-fiction",
+      "original_publication_year": 1995,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": false,
+      "is_coffee_table_book": false,
+      "goodreads_url": "https://www.goodreads.com/book/show/10834742-building-strong-brands",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "David A. Aaker",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "25ba74a4-fa89-4214-af3c-3e2dcf761393",
+      "title": "Half A War",
+      "work_type": "Novel",
+      "original_publication_year": 2015,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/28924910-half-a-war",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "Shattered Sea",
+          "sequence_number": 3.0
+        }
+      ],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Joe Abercrombie",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "45158730-498b-4839-a919-525b91911ce0",
+      "title": "Archie's Story & Game #16",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "16",
+      "subject_tags": [
+        "Archie's"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Archie's Story & Game Digest Magazine #16 (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie's Story & Game",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Rod Ollerenshaw",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Henry Scarpelli",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "75dbf9b2-11cb-43c1-b054-8b064dd0da7a",
+      "title": "Angry Maushi #3",
+      "work_type": "Comic Story",
+      "original_publication_year": 2022,
+      "issue_number": "3",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Angry Maushi",
+        "publisher": "Abhijeet Kini Studios"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Abhijeet Kini",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Abhijeet Kini",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "e1f7364c-b7c8-4087-a145-23428efc7907",
+      "title": "Archie (2015) #1",
+      "work_type": "Comic Story",
+      "original_publication_year": 2016,
+      "issue_number": "1",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie (2015)",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mark Waid",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Fiona Staples",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Annie Wu",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Veronica Fish",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "f368f03d-d6e5-477f-b3b8-79d63db8b226",
+      "title": "Glimpses on the History of Tibet",
+      "work_type": "Non-fiction",
+      "original_publication_year": 2013,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": false,
+      "is_coffee_table_book": true,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Clause Arpi",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "6edb403b-f4be-472c-862e-c70706d7debb",
+      "title": "Honour Among Thieves/Kane And Abel",
+      "work_type": "Novel",
+      "original_publication_year": 2005,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/157159.Honour_Among_Thieves_Kane_And_Abel",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "Kane and Abel",
+          "sequence_number": 1.0
+        }
+      ],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Jeffrey Archer",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "dde4bef3-d32e-4ae7-b3a8-262f0444cb73",
+      "title": "Philosophy of Hinduism",
+      "work_type": "Non-fiction",
+      "original_publication_year": 2010,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": false,
+      "is_coffee_table_book": false,
+      "goodreads_url": "https://www.goodreads.com/book/show/216223893-philosophy-of-hinduism",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "B.R. Ambedkar",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "9cbb1088-4fdf-45f1-b186-e0f066b87435",
+      "title": "Lumberjanes #3",
+      "work_type": "Comic Story",
+      "original_publication_year": 2015,
+      "issue_number": "3",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Lumberjanes",
+        "publisher": "Boom!"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "552723aa-83f8-4e1d-b3b6-2c2ec544c65b",
+      "title": "Archie (2015) #5",
+      "work_type": "Comic Story",
+      "original_publication_year": 2016,
+      "issue_number": "5",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie (2015)",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mark Waid",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Fiona Staples",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Annie Wu",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Veronica Fish",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "9ede922f-89d2-4f7e-a836-52a604e0136b",
+      "title": "Tinkle #572",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "572",
+      "subject_tags": [
+        "Indian"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Tinkle",
+        "publisher": "ACK Media"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Luis Fernandes",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Various",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "edf4d7f2-21b7-413c-99ea-0e7220e20a73",
+      "title": "Archie's Double Digest #123",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "123",
+      "subject_tags": [
+        "Archie's"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Archie's Double Digest Magazine #123 (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie's Double Digest",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "George Gladir",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Tim Kennedy",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "cdc54bdd-8855-4fe0-80e8-b5e1cae537e3",
+      "title": "Dark Apprentice",
+      "work_type": "Novel",
+      "original_publication_year": 1994,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/760111.Dark_Apprentice",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "Star Wars: The Jedi Academy",
+          "sequence_number": 2.0
+        }
+      ],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Kevin J. Anderson",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "22f8405e-5d0a-40a7-b4bd-95983fb88a16",
+      "title": "Captain Power and the Soldiers of The Future #1",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "1",
+      "subject_tags": [
+        "Indie"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Captain Power and the Soldiers of The Future #1 - A Summoning of Thunder (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Captain Power and the Soldiers of The Future",
+        "publisher": "Continuity Comics"
+      },
+      "collections": [],
+      "arcs": [
+        {
+          "name": "Captain Power and the Soldiers of The Future",
+          "arc_position": 1,
+          "total_parts": 2
+        }
+      ],
+      "creators": [
+        {
+          "display_name": "Neal Adams",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Peter Stone",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Neal Adams",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "c483ff55-00ce-46d8-bb66-0b1754999a27",
+      "title": "Archie (2015) #2",
+      "work_type": "Comic Story",
+      "original_publication_year": 2016,
+      "issue_number": "2",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie (2015)",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mark Waid",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Fiona Staples",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Annie Wu",
+          "role": "Artist"
+        },
+        {
+          "display_name": "Veronica Fish",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "c3e76d50-f6d3-4124-8b86-51027d03c732",
+      "title": "Sabrina The Teenage Witch #13",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "13",
+      "subject_tags": [
+        "Archie's"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": "https://comicvine.gamespot.com/sabrina-the-teenage-witch-13/4000-322701/",
+      "volume_run": {
+        "name": "Sabrina The Teenage Witch",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Bill Golliher",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dan Decarlo",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "7f36ec9f-777d-4792-8f8e-ff155626f859",
+      "title": "Archie & Friends #66",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "66",
+      "subject_tags": [
+        "Archie's"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Archie & Friends #66 (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie & Friends",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "George Gladir",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Rex Lindsey",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "00a38acd-369d-4bea-b6a4-ce13e9fc14a2",
+      "title": "A\u0304o, ham\u0310se eka sa\u0304tha",
+      "work_type": "Hindi Literature",
+      "original_publication_year": 1988,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mohini Rao",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "d9567cb1-4004-4f79-aeb8-06ac5ad55558",
+      "title": "The Jetsons #1",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "1",
+      "subject_tags": [
+        "Cartoon Network"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Jetsons #1 - Journey Back Park (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "The Jetsons",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Unknown",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Unknown",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "7db59a8a-ea79-4a65-a47a-e39f0736ff9a",
+      "title": "Batman #456",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "456",
+      "subject_tags": [
+        "Batman"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Batman #456 - Identity Crisis, Part Two: Without Fear of Consequence... (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Batman",
+        "publisher": "DC Comics"
+      },
+      "collections": [],
+      "arcs": [
+        {
+          "name": "Identity Crisis",
+          "arc_position": 2,
+          "total_parts": 2
+        }
+      ],
+      "creators": [
+        {
+          "display_name": "Alan Grant",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Norm Breyfogle",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "51821014-d129-4a86-86fe-8a1fc1e2cbdf",
+      "title": "Batman #457",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "457",
+      "subject_tags": [
+        "Batman"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Batman #457 - Master of Fear (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Batman",
+        "publisher": "DC Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Alan Grant",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Norm Breyfogle",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "323e0d4b-a797-4cab-977c-6bf50f3a46cb",
+      "title": "Half The World",
+      "work_type": "Novel",
+      "original_publication_year": 2015,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "https://www.goodreads.com/book/show/25744617-half-the-world",
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "Shattered Sea",
+          "sequence_number": 2.0
+        }
+      ],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Joe Abercrombie",
+          "role": "Author"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "06609cca-245b-4675-975d-6b2da4011fdc",
+      "title": "Lumberjanes #2",
+      "work_type": "Comic Story",
+      "original_publication_year": 2015,
+      "issue_number": "2",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Lumberjanes",
+        "publisher": "Boom!"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "4df1935f-cb0e-46c1-8d07-849e6e93d6c7",
+      "title": "Hellboy in Hell: The Descent #1",
+      "work_type": "Comic Story",
+      "original_publication_year": 2014,
+      "issue_number": "1",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Hellboy in Hell: The Descent",
+        "publisher": "Dark Horse Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mike Mignola",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dave Stewart",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "e6b579f8-311c-48f2-afa1-9715f1534d03",
+      "title": "Archie #504",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "504",
+      "subject_tags": [
+        "Archie's"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Archie #504 (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Archie",
+        "publisher": "Archie Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "George Gladir",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Stan Goldberg",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "3b84d1b9-e187-4399-892a-720e85f7f976",
+      "title": "Lumberjanes #4",
+      "work_type": "Comic Story",
+      "original_publication_year": 2015,
+      "issue_number": "4",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Lumberjanes",
+        "publisher": "Boom!"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "85fc44c8-b2cc-442c-bbd9-377ea16d8f4f",
+      "title": "Hellboy in Hell: The Descent #5",
+      "work_type": "Comic Story",
+      "original_publication_year": 2014,
+      "issue_number": "5",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Hellboy in Hell: The Descent",
+        "publisher": "Dark Horse Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mike Mignola",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dave Stewart",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "c07c1ec2-df03-423e-91eb-5ccdfd05b95c",
+      "title": "Nirmala Sitharaman",
+      "work_type": "Magazine Issue",
+      "original_publication_year": 2022,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [
+        {
+          "name": "The Caravan",
+          "sequence_number": 4.0
+        }
+      ],
+      "arcs": [],
+      "creators": [],
+      "reading_status": []
+    },
+    {
+      "work_id": "994c9bd2-48f9-4879-a291-e747631e6409",
+      "title": "Tulsidas' Ramayana",
+      "work_type": "Comic Story",
+      "original_publication_year": 2012,
+      "issue_number": null,
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": null,
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Margie Sastry",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Tulsidas",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dilip Kadam",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "78c703a8-428d-41ea-8076-73322e956b26",
+      "title": "Hellboy in Hell: The Descent #3",
+      "work_type": "Comic Story",
+      "original_publication_year": 2014,
+      "issue_number": "3",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Hellboy in Hell: The Descent",
+        "publisher": "Dark Horse Comics"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Mike Mignola",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Dave Stewart",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "61cf46d9-3111-4f00-b2b6-ff90a0bafba4",
+      "title": "Batman #455",
+      "work_type": "Comic Story",
+      "original_publication_year": null,
+      "issue_number": "455",
+      "subject_tags": [
+        "Batman"
+      ],
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": "Batman #455 - Identity Crisis, Part One (Issue)",
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Batman",
+        "publisher": "DC Comics"
+      },
+      "collections": [],
+      "arcs": [
+        {
+          "name": "Identity Crisis",
+          "arc_position": 1,
+          "total_parts": 2
+        }
+      ],
+      "creators": [
+        {
+          "display_name": "Alan Grant",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Norm Breyfogle",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "b0d794b7-feb2-4e31-a263-d4a5e891adda",
+      "title": "Lumberjanes #1",
+      "work_type": "Comic Story",
+      "original_publication_year": 2015,
+      "issue_number": "1",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Lumberjanes",
+        "publisher": "Boom!"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Noelle Stevenson",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "f0a24cf8-752d-4558-8ac3-6039d5c58c46",
+      "title": "Angry Maushi #2",
+      "work_type": "Comic Story",
+      "original_publication_year": 2022,
+      "issue_number": "2",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Angry Maushi",
+        "publisher": "Abhijeet Kini Studios"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Abhijeet Kini",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Abhijeet Kini",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    },
+    {
+      "work_id": "e0eb5c20-2af8-445a-ba63-4cffa61f8e18",
+      "title": "Angry Maushi #1",
+      "work_type": "Comic Story",
+      "original_publication_year": 2022,
+      "issue_number": "1",
+      "subject_tags": null,
+      "is_narrative_nonfiction": null,
+      "is_coffee_table_book": null,
+      "goodreads_url": null,
+      "comicvine_url": null,
+      "volume_run": {
+        "name": "Angry Maushi",
+        "publisher": "Abhijeet Kini Studios"
+      },
+      "collections": [],
+      "arcs": [],
+      "creators": [
+        {
+          "display_name": "Abhijeet Kini",
+          "role": "Writer"
+        },
+        {
+          "display_name": "Abhijeet Kini",
+          "role": "Artist"
+        }
+      ],
+      "reading_status": []
+    }
+  ],
+  "creators": [
+    {
+      "creator_id": "e41ccaff-d1fa-48ea-b36f-ad553d4e6066",
+      "display_name": "Tulsidas",
+      "sort_name": "Tulsidas",
+      "first_name": null,
+      "last_name": null,
+      "aliases": null
+    },
+    {
+      "creator_id": "909086c0-eb27-4d0a-833c-0834fdeae9f4",
+      "display_name": "Isaac Asimov",
+      "sort_name": "Asimov, Isaac",
+      "first_name": "Isaac",
+      "last_name": "Asimov",
+      "aliases": null
+    },
+    {
+      "creator_id": "4bd9a192-a60e-408b-a756-70e4a23a0281",
+      "display_name": "Dan Parent",
+      "sort_name": "Parent, Dan",
+      "first_name": "Dan",
+      "last_name": "Parent",
+      "aliases": null
+    },
+    {
+      "creator_id": "6a578f27-5410-4ef5-a8ee-889a45a34cc7",
+      "display_name": "Stan Goldberg",
+      "sort_name": "Goldberg, Stan",
+      "first_name": "Stan",
+      "last_name": "Goldberg",
+      "aliases": null
+    },
+    {
+      "creator_id": "05856013-ae1f-4a27-8889-d753a83b534f",
+      "display_name": "Fiona Staples",
+      "sort_name": "Staples, Fiona",
+      "first_name": "Fiona",
+      "last_name": "Staples",
+      "aliases": null
+    },
+    {
+      "creator_id": "1ce99d13-8ea0-4cee-a6e8-d5f293111f27",
+      "display_name": "Luis Fernandes",
+      "sort_name": "Fernandes, Luis",
+      "first_name": "Luis",
+      "last_name": "Fernandes",
+      "aliases": null
+    },
+    {
+      "creator_id": "ac9e99ea-36b8-44d2-8a03-6e949d876eb5",
+      "display_name": "Jeffrey Archer",
+      "sort_name": "Archer, Jeffrey",
+      "first_name": "Jeffrey",
+      "last_name": "Archer",
+      "aliases": null
+    },
+    {
+      "creator_id": "87df20a7-fcd5-462d-bfbc-d03229128357",
+      "display_name": "Kevin J. Anderson",
+      "sort_name": "Anderson, Kevin J.",
+      "first_name": "Kevin J.",
+      "last_name": "Anderson",
+      "aliases": null
+    },
+    {
+      "creator_id": "6ebdd985-2142-4a35-9ee7-0be318643f74",
+      "display_name": "Neal Adams",
+      "sort_name": "Adams, Neal",
+      "first_name": "Neal",
+      "last_name": "Adams",
+      "aliases": null
+    },
+    {
+      "creator_id": "2d946330-e647-429b-b6bb-bc7a90b2effc",
+      "display_name": "Norm Breyfogle",
+      "sort_name": "Breyfogle, Norm",
+      "first_name": "Norm",
+      "last_name": "Breyfogle",
+      "aliases": null
+    }
+  ],
+  "collections": [
+    {
+      "collection_id": "f9103fe1-2593-446e-9e39-a31b077509e7",
+      "name": "Shattered Sea",
+      "collection_type": "Series",
+      "parent_collection_id": null
+    },
+    {
+      "collection_id": "a7471bd1-f7c4-45c5-8998-09f31069daac",
+      "name": "Star Wars: The Jedi Academy",
+      "collection_type": "Series",
+      "parent_collection_id": null
+    },
+    {
+      "collection_id": "cfca71cb-175d-4f34-82f4-0d5e65ba369b",
+      "name": "Kane and Abel",
+      "collection_type": "Series",
+      "parent_collection_id": null
+    },
+    {
+      "collection_id": "4a4dadd3-046f-401f-b6b4-48f461f8a98f",
+      "name": "Foundation",
+      "collection_type": "Series",
+      "parent_collection_id": null
+    },
+    {
+      "collection_id": "32e56ae6-438a-4675-ae63-62fef91dbbb7",
+      "name": "Robot",
+      "collection_type": "Series",
+      "parent_collection_id": null
+    }
+  ],
+  "story_arcs": [
+    {
+      "arc_id": "2b176ebf-f559-42bb-8f76-1faa49c6a5da",
+      "name": "Identity Crisis",
+      "total_parts": 2,
+      "parent_arc_id": null
+    },
+    {
+      "arc_id": "903fe452-0282-43b6-bf87-9a23212668d7",
+      "name": "Captain Power and the Soldiers of The Future",
+      "total_parts": 2,
+      "parent_arc_id": null
+    },
+    {
+      "arc_id": "e736890c-c4dd-4954-9509-fb1cb53c68a3",
+      "name": "Who is Strange Visitor",
+      "total_parts": 4,
+      "parent_arc_id": null
+    },
+    {
+      "arc_id": "18cc98e2-68c1-4aad-9b20-51acba462df1",
+      "name": "The Zoo",
+      "total_parts": 6,
+      "parent_arc_id": null
+    },
+    {
+      "arc_id": "06d56b59-338d-4c6f-a26f-9880217c0d1f",
+      "name": "The Last Amazon",
+      "total_parts": 5,
+      "parent_arc_id": null
+    }
+  ],
+  "activity_ledger": [
+    {
+      "log_id": "7f435d8d-eda5-427b-bb30-f0866d03ce82",
+      "user_profile": "Utsav",
+      "work_id": "cab92fff-842e-41c8-bde5-31a4a7f20a74",
+      "event_type": "Rated",
+      "event_value": "4.0"
+    },
+    {
+      "log_id": "08453d15-41a4-4d67-b432-318e473fe568",
+      "user_profile": "Utsav",
+      "work_id": "f2b2264c-e32f-4bb9-a7e5-788a2105b2f6",
+      "event_type": "Rated",
+      "event_value": "3.0"
+    },
+    {
+      "log_id": "f81b84e5-378f-4d24-a7ba-4782da2757d3",
+      "user_profile": "Utkarsh",
+      "work_id": "588186b7-d8b8-48fe-bd87-32e1cdfebfe6",
+      "event_type": "Rated",
+      "event_value": "3.0"
+    },
+    {
+      "log_id": "89dcc161-9aaa-4085-9fe0-6140566e5f48",
+      "user_profile": "Utsav",
+      "work_id": "a48c144a-2ece-4483-baad-fbcd918ec0a7",
+      "event_type": "Rated",
+      "event_value": "4.0"
+    },
+    {
+      "log_id": "cd2fecc9-fbe9-4062-b7a3-26fe9ca84583",
+      "user_profile": "Utkarsh",
+      "work_id": "cf4ab780-be36-4dfb-96a8-a63c6078d924",
+      "event_type": "Rated",
+      "event_value": "3.0"
+    },
+    {
+      "log_id": "47f8da09-f82f-49fc-91b0-12242bfddc7c",
+      "user_profile": "Utsav",
+      "work_id": "44d6f8ce-c2df-4a5e-9ea4-762bb0b11f2f",
+      "event_type": "Rated",
+      "event_value": "5.0"
+    },
+    {
+      "log_id": "17a6f96d-bc6a-4d56-8fdf-d00f4e29ddf4",
+      "user_profile": "Utkarsh",
+      "work_id": "44d6f8ce-c2df-4a5e-9ea4-762bb0b11f2f",
+      "event_type": "Rated",
+      "event_value": "5.0"
+    },
+    {
+      "log_id": "8488e663-8e24-43d0-a9b5-974318360013",
+      "user_profile": "Utsav",
+      "work_id": "9e0d5b3d-20a5-4e8f-9e32-a54181be9846",
+      "event_type": "Rated",
+      "event_value": "4.0"
+    },
+    {
+      "log_id": "ef591c64-513b-4273-bb65-cdd05a1724bc",
+      "user_profile": "Utkarsh",
+      "work_id": "9e0d5b3d-20a5-4e8f-9e32-a54181be9846",
+      "event_type": "Rated",
+      "event_value": "5.0"
+    },
+    {
+      "log_id": "cc10a515-372c-4bec-af11-d0f27c70ba45",
+      "user_profile": "Utsav",
+      "work_id": "c8c068a5-cd96-45a0-a93d-023a1b42acb1",
+      "event_type": "Rated",
+      "event_value": "4.0"
+    }
+  ],
+  "data_quality_flags": [
+    {
+      "flag_id": "4d5a8c48-bc70-4cc8-8e28-a99de2a23118",
+      "entity_type": "artifacts",
+      "entity_id": "6e7b9450-69bb-4c5f-a9f3-e05a6ca917c5",
+      "flag_type": "missing_isbn",
+      "description": "Missing ISBN for Hindi book: Bhagat Singh se Dosti",
+      "status": "open"
+    },
+    {
+      "flag_id": "e4861a0a-a71a-4e47-ad40-a91505075f4f",
+      "entity_type": "artifacts",
+      "entity_id": "0821c8d4-441e-4220-ba8c-3cc37bee7a67",
+      "flag_type": "missing_isbn",
+      "description": "Missing ISBN for non-fiction: The Teaching of Buddha",
+      "status": "open"
+    },
+    {
+      "flag_id": "0065274a-fc08-4f43-ae91-888ac1d3db88",
+      "entity_type": "artifacts",
+      "entity_id": "14c7e60e-924f-4a56-8799-94118ce188ce",
+      "flag_type": "missing_isbn",
+      "description": "Missing ISBN for non-fiction: People-Centric Nationalism",
+      "status": "open"
+    },
+    {
+      "flag_id": "384350ee-ea33-4720-81b2-1b15a391c60f",
+      "entity_type": "artifacts",
+      "entity_id": "57b7a4f2-7599-4200-a3f1-fdc4103038fe",
+      "flag_type": "missing_isbn",
+      "description": "Missing ISBN for non-fiction: Satyagraha Against Imperialism",
+      "status": "open"
+    },
+    {
+      "flag_id": "3bc24547-dafa-484d-8c74-a2a69142d5de",
+      "entity_type": "artifacts",
+      "entity_id": "cdc00d82-8a84-490e-8f3f-f6ca11d59869",
+      "flag_type": "missing_isbn",
+      "description": "Missing ISBN for non-fiction: V\u00f6est Illustrated",
+      "status": "open"
+    }
+  ]
+}

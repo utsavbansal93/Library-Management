@@ -1,0 +1,136 @@
+{
+  "validation_timestamp": "2026-04-02T13:00:32.917881+00:00",
+  "overall_status": "PASS_WITH_WARNINGS",
+  "source_file_hash": "50a58d40c03c9b182c121ef748786e5e7c8e083a0032c3c7b4d1b2bdf3eb19b3",
+  "database_file_hash": "c769a9e8cbefea3726824e9deb3a88aa46b6b07419531f5b3996c7302e4e0e42",
+  "layer_results": {
+    "row_counts": {
+      "status": "PASS",
+      "details": [
+        {
+          "sheet": "Novels, etc..",
+          "source_rows": 269,
+          "artifacts_created": 269,
+          "match": true
+        },
+        {
+          "sheet": "Hindi Books",
+          "source_rows": 5,
+          "artifacts_created": 5,
+          "match": true
+        },
+        {
+          "sheet": "Non-fiction",
+          "source_rows": 84,
+          "artifacts_created": 84,
+          "match": true
+        },
+        {
+          "sheet": "Magazines",
+          "source_rows": 18,
+          "artifacts_created": 18,
+          "match": true
+        },
+        {
+          "sheet": "Comics (GNs)",
+          "source_rows": 96,
+          "artifacts_created": 96,
+          "match": true
+        },
+        {
+          "sheet": "Comics (Issues)",
+          "source_rows": 590,
+          "artifacts_created": 590,
+          "match": true
+        }
+      ]
+    },
+    "field_completeness": {
+      "status": "PASS",
+      "coverage_pct": 99.97,
+      "missing_fields": [
+        {
+          "sheet": "Non-fiction",
+          "row": 22,
+          "column": "Title",
+          "reason": "not found"
+        }
+      ]
+    },
+    "semantic_integrity": {
+      "status": "PASS",
+      "checks_passed": 7,
+      "checks_failed": 0,
+      "issues": []
+    },
+    "edge_cases": {
+      "status": "WARN",
+      "results": [
+        {
+          "case": "Batman #22 dual-story",
+          "status": "PASS",
+          "details": "Works: ['Batman #613', 'Batman: Gotham Knights #18'], partial flags: [0, 1]"
+        },
+        {
+          "case": "DC Elseworlds dual-work",
+          "status": "WARN",
+          "details": "Works linked: ['DC Elseworlds: Last Stand on Krypton - Super Special']"
+        },
+        {
+          "case": "New X-Men Super Special flagged",
+          "status": "WARN",
+          "details": "Flagged: False, collects_note present: False, flags: ['missing_isbn']"
+        },
+        {
+          "case": "Hulk dual arc membership",
+          "status": "PASS",
+          "details": "Arcs: ['Snake Eyes', 'The Dogs of War']"
+        },
+        {
+          "case": "Honour Among Thieves compound title",
+          "status": "PASS",
+          "details": "Found: 'Honour Among Thieves/Kane And Abel', flags: none"
+        },
+        {
+          "case": "Lent novels",
+          "status": "PASS",
+          "details": "Gone Girl: \u2713 Lent; Acts of God: \u2713 Lent"
+        },
+        {
+          "case": "Hindi ISBN format",
+          "status": "PASS",
+          "details": "A\u0304o, ham\u0310se eka sa\u0304tha: '8123720122' OK; Raag Darbaari: '9788126713967' OK; Satya ke prayog: '9788173092725' OK; Paper Chor: '9789384375416' OK"
+        },
+        {
+          "case": "Tulsidas Ramayana DNF",
+          "status": "PASS",
+          "details": "collects_note has DNF: True, work_count: 1"
+        },
+        {
+          "case": "Hulk Special null volume",
+          "status": "PASS",
+          "details": "Works: ['Hulk Special'], flags: ['unparsed_collects', 'missing_isbn']"
+        },
+        {
+          "case": "Batman Adventures #28 partial",
+          "status": "PASS",
+          "details": "Notes: 'Only Need to Know is collected, not The Balance', is_partial: 0"
+        }
+      ]
+    },
+    "referential_integrity": {
+      "status": "PASS",
+      "orphaned_records": []
+    },
+    "data_quality_flags": {
+      "status": "INFO",
+      "total_flags_generated": 156,
+      "breakdown": {
+        "conflicting_data": 24,
+        "missing_isbn": 36,
+        "name_inconsistency": 84,
+        "unparsed_collects": 12
+      }
+    }
+  }
+}

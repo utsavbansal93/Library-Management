@@ -1,0 +1,114 @@
+{
+  "migration_timestamp": "2026-04-02T12:47:36.323829",
+  "source_file": "/Users/utsavbansal/Documents/Claude/Utskomia Library/Our Library-3.xlsx",
+  "overall_status": "PASS",
+  "sheet_results": {
+    "Novels": {
+      "sheet_name": "Novels, etc..",
+      "source_rows": 269,
+      "artifacts_created": 269,
+      "works_created": 269,
+      "creators_found": 0,
+      "collections_created": 0,
+      "volume_runs_created": 0,
+      "story_arcs_created": 0,
+      "activity_entries": 53,
+      "errors": [],
+      "warnings": []
+    },
+    "Hindi Books": {
+      "sheet_name": "Hindi Books",
+      "source_rows": 5,
+      "artifacts_created": 5,
+      "works_created": 5,
+      "creators_found": 0,
+      "collections_created": 0,
+      "volume_runs_created": 0,
+      "story_arcs_created": 0,
+      "activity_entries": 0,
+      "errors": [],
+      "warnings": []
+    },
+    "Non-fiction": {
+      "sheet_name": "Non-fiction",
+      "source_rows": 84,
+      "artifacts_created": 84,
+      "works_created": 84,
+      "creators_found": 0,
+      "collections_created": 0,
+      "volume_runs_created": 0,
+      "story_arcs_created": 0,
+      "activity_entries": 0,
+      "errors": [],
+      "warnings": []
+    },
+    "Magazines": {
+      "sheet_name": "Magazines",
+      "source_rows": 18,
+      "artifacts_created": 18,
+      "works_created": 18,
+      "creators_found": 0,
+      "collections_created": 0,
+      "volume_runs_created": 0,
+      "story_arcs_created": 0,
+      "activity_entries": 0,
+      "errors": [],
+      "warnings": []
+    },
+    "Comics (GNs)": {
+      "sheet_name": "Comics (GNs)",
+      "source_rows": 96,
+      "artifacts_created": 96,
+      "works_created": 385,
+      "creators_found": 0,
+      "collections_created": 0,
+      "volume_runs_created": 0,
+      "story_arcs_created": 0,
+      "activity_entries": 0,
+      "errors": [],
+      "warnings": []
+    },
+    "Comics (Issues)": {
+      "sheet_name": "Comics (Issues)",
+      "source_rows": 590,
+      "artifacts_created": 590,
+      "works_created": 673,
+      "creators_found": 0,
+      "collections_created": 0,
+      "volume_runs_created": 0,
+      "story_arcs_created": 0,
+      "activity_entries": 2,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "entity_totals": {
+    "creators": 650,
+    "creator_roles": 2629,
+    "collections": 90,
+    "volume_runs": 266,
+    "works": 1423,
+    "work_collections": 211,
+    "story_arcs": 127,
+    "work_arc_membership": 328,
+    "artifacts": 1062,
+    "artifact_works": 1434,
+    "copies": 1062,
+    "activity_ledger": 55,
+    "reading_status": 55,
+    "field_provenance": 2496,
+    "data_quality_flags": 156
+  },
+  "collects_parsing": {
+    "parsed": 50,
+    "flagged": 12,
+    "skipped": 27
+  },
+  "creator_stats": {
+    "raw_names_seen": 650,
+    "unique_creators": 650,
+    "dedup_hits": 1331
+  },
+  "errors": [],
+  "warnings": []
+}
