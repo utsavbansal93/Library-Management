@@ -48,7 +48,8 @@ export default function SearchResults() {
       results.arcs.length > 0 ||
       results.artifacts.length > 0 ||
       results.works.length > 0 ||
-      results.collections.length > 0);
+      results.collections.length > 0 ||
+      (results.volume_runs?.length ?? 0) > 0);
 
   return (
     <div className="min-h-screen bg-surface px-6 py-10 lg:px-12">
@@ -134,6 +135,28 @@ export default function SearchResults() {
                     </span>
                     <span className="flex-1">{a.name}</span>
                     {a.total_parts != null && <Badge>{a.total_parts} parts</Badge>}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Series (Volume Runs) */}
+          {(results.volume_runs?.length ?? 0) > 0 && (
+            <section>
+              <SectionHeading title="Series" count={results.volume_runs.length} />
+              <div className="flex flex-col gap-1">
+                {results.volume_runs.map((vr) => (
+                  <Link
+                    key={vr.volume_run_id}
+                    to={`/?volume_run_id=${vr.volume_run_id}`}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 font-body text-sm text-on-surface hover:bg-surface-container-low"
+                  >
+                    <span className="material-symbols-outlined text-secondary text-lg">
+                      library_books
+                    </span>
+                    <span className="flex-1">{vr.name}</span>
+                    <Badge>{vr.publisher}</Badge>
                   </Link>
                 ))}
               </div>

@@ -154,6 +154,39 @@ export interface PaginatedArtifacts {
   total: number;
 }
 
+export interface WorkCreatorBrief {
+  display_name: string;
+  role: string;
+}
+
+export interface WorkArcMembershipBrief {
+  arc_id: string;
+  name?: string | null;
+  arc_position?: number | null;
+}
+
+export interface WorkCollectionMembershipBrief {
+  collection_id: string;
+  name?: string | null;
+  sequence_number?: number | null;
+}
+
+export interface ArtifactWorkEnriched {
+  id: string;
+  work_id: string;
+  position: number;
+  is_partial: boolean;
+  collects_note?: string | null;
+  title: string;
+  work_type: string;
+  issue_number?: string | null;
+  original_publication_year?: number | null;
+  subject_tags?: string[] | null;
+  creators: WorkCreatorBrief[];
+  arc_memberships: WorkArcMembershipBrief[];
+  collection_memberships: WorkCollectionMembershipBrief[];
+}
+
 export interface ArtifactArcMembership {
   arc_id: string;
   name?: string | null;
@@ -194,6 +227,7 @@ export interface ArtifactDetail {
   artifact_works: ArtifactWorkBrief[];
   copies: CopyBrief[];
   creators: CreatorRoleBrief[];
+  artifact_works_enriched: ArtifactWorkEnriched[];
   arc_memberships: ArtifactArcMembership[];
   collection_memberships: ArtifactCollectionMembership[];
 }
@@ -437,6 +471,7 @@ export interface SearchResults {
   creators: CreatorBrief[];
   collections: CollectionBrief[];
   arcs: ArcBrief[];
+  volume_runs: VolumeRunBrief[];
 }
 
 // --- Enums ---

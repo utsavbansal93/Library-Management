@@ -162,6 +162,64 @@ def get_artifact(artifact_id: str, db: Session = Depends(get_db)):
         result.arc_memberships = list(seen_arcs.values())
         result.collection_memberships = list(seen_colls.values())
 
+        # Build enriched per-work data for "What's Inside"
+        from collections import defaultdict
+
+        work_creator_roles = (
+            db.query(CreatorRole)
+            .options(joinedload(CreatorRole.creator))
+            .filter(
+                CreatorRole.target_type == TargetType.WORK.value,
+                CreatorRole.target_id.in_(work_ids),
+            )
+            .all()
+        )
+        creators_by_work: dict = defaultdict(list)
+        for cr in work_creator_roles:
+            creators_by_work[cr.target_id].append({
+                "display_name": cr.creator.display_name if cr.creator else "Unknown",
+                "role": cr.role,
+            })
+
+        arcs_by_work: dict = defaultdict(list)
+        for r in arc_rows:
+            arcs_by_work[r.work_id].append({
+                "arc_id": r.arc_id,
+                "name": r.arc.name if r.arc else None,
+                "arc_position": r.arc_position,
+            })
+
+        colls_by_work: dict = defaultdict(list)
+        for r in coll_rows:
+            colls_by_work[r.work_id].append({
+                "collection_id": r.collection_id,
+                "name": r.collection.name if r.collection else None,
+                "sequence_number": r.sequence_number,
+            })
+
+        enriched = []
+        for aw in artifact.artifact_works:
+            work = aw.work
+            if not work:
+                continue
+            enriched.append({
+                "id": aw.id,
+                "work_id": aw.work_id,
+                "position": aw.position,
+                "is_partial": aw.is_partial,
+                "collects_note": aw.collects_note,
+                "title": work.title,
+                "work_type": work.work_type,
+                "issue_number": work.issue_number,
+                "original_publication_year": work.original_publication_year,
+                "subject_tags": work.subject_tags,
+                "creators": creators_by_work.get(aw.work_id, []),
+                "arc_memberships": arcs_by_work.get(aw.work_id, []),
+                "collection_memberships": colls_by_work.get(aw.work_id, []),
+            })
+
+        result.artifact_works_enriched = enriched
+
     return result
 
 
@@ -339,6 +397,37 @@ def get_artifact_cover(artifact_id: str, db: Session = Depends(get_db)):
                 media_type="image/jpeg",
                 headers={"Cache-Control": "public, max-age=3600", "ETag": etag}
             )
+
+    # Fallback: try the first linked work's artifact cover
+    first_aw = (
+        db.query(ArtifactWork)
+        .filter(ArtifactWork.artifact_id == artifact_id)
+        .order_by(ArtifactWork.position)
+        .first()
+    )
+    if first_aw:
+        import hashlib
+        cover_artifact = (
+            db.query(Artifact)
+            .join(ArtifactWork, ArtifactWork.artifact_id == Artifact.artifact_id)
+            .filter(
+                ArtifactWork.work_id == first_aw.work_id,
+                Artifact.cover_image_path.isnot(None),
+                Artifact.artifact_id != artifact_id,
+            )
+            .first()
+        )
+        if cover_artifact and cover_artifact.cover_image_path:
+            fp = BASE_DIR / cover_artifact.cover_image_path
+            if fp.is_file():
+                etag = hashlib.md5(
+                    f"{cover_artifact.cover_image_path}:{fp.stat().st_mtime}".encode()
+                ).hexdigest()
+                return FileResponse(
+                    str(fp),
+                    media_type="image/jpeg",
+                    headers={"Cache-Control": "public, max-age=3600", "ETag": etag},
+                )
 
     # No cover image — return generated SVG placeholder
     svg = _generate_placeholder_svg(artifact.title, artifact.format)

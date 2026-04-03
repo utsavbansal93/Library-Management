@@ -187,8 +187,33 @@ export default function ArtifactDetail() {
     );
   }
 
-  const sortedWorks = [...artifact.artifact_works].sort(
+  // Enriched works for "What's Inside" cards
+  const enrichedWorks = [...(artifact.artifact_works_enriched ?? [])].sort(
     (a, b) => a.position - b.position,
+  );
+
+  // Common arcs/collections shared by ALL works (for multi-work artifacts)
+  const commonArcs =
+    enrichedWorks.length > 1
+      ? (enrichedWorks[0]?.arc_memberships ?? []).filter((arc) =>
+          enrichedWorks.every((w) =>
+            w.arc_memberships.some((a) => a.arc_id === arc.arc_id),
+          ),
+        )
+      : [];
+  const commonCollections =
+    enrichedWorks.length > 1
+      ? (enrichedWorks[0]?.collection_memberships ?? []).filter((coll) =>
+          enrichedWorks.every((w) =>
+            w.collection_memberships.some(
+              (c) => c.collection_id === coll.collection_id,
+            ),
+          ),
+        )
+      : [];
+  const commonArcIds = new Set(commonArcs.map((a) => a.arc_id));
+  const commonCollectionIds = new Set(
+    commonCollections.map((c) => c.collection_id),
   );
 
   return (
@@ -634,33 +659,149 @@ export default function ArtifactDetail() {
           </section>
         )}
 
-        {/* What's Inside */}
-        {sortedWorks.length > 0 && (
+        {/* What's Inside — enriched work cards */}
+        {enrichedWorks.length > 0 && (
           <section>
             <SectionLabel>What's Inside</SectionLabel>
-            <ol className="mt-3 space-y-2">
-              {sortedWorks.map((aw, idx) => (
-                <li
-                  key={aw.id}
-                  className="flex items-baseline gap-3 font-body text-base"
-                >
-                  <span className="shrink-0 font-label text-xs text-on-surface-variant">
-                    {idx + 1}.
-                  </span>
-                  <Link
-                    to={`/works/${aw.work_id}`}
-                    className="text-primary underline-offset-2 hover:underline"
-                  >
-                    {aw.work?.title ?? 'Untitled Work'}
-                  </Link>
-                  {aw.is_partial && (
-                    <span className="rounded-full bg-tertiary-fixed px-2 py-0.5 font-label text-[10px] font-bold uppercase tracking-widest text-on-tertiary-fixed">
-                      Partial
+
+            {/* Common attributes banner (multi-work only) */}
+            {enrichedWorks.length > 1 && commonArcs.length > 0 && (
+              <div className="mt-3 rounded-2xl bg-primary/5 border border-primary/10 px-4 py-3">
+                <p className="font-body text-xs text-on-surface-variant">
+                  All stories are part of{' '}
+                  {commonArcs.map((arc, i) => (
+                    <span key={arc.arc_id}>
+                      {i > 0 && ', '}
+                      <Link
+                        to={`/arcs/${arc.arc_id}`}
+                        className="font-semibold text-primary hover:underline underline-offset-2"
+                      >
+                        {arc.name}
+                      </Link>
                     </span>
-                  )}
-                </li>
-              ))}
-            </ol>
+                  ))}
+                </p>
+              </div>
+            )}
+            {enrichedWorks.length > 1 && commonCollections.length > 0 && (
+              <div className={cn(
+                'rounded-2xl bg-primary/5 border border-primary/10 px-4 py-3',
+                commonArcs.length > 0 ? 'mt-2' : 'mt-3',
+              )}>
+                <p className="font-body text-xs text-on-surface-variant">
+                  Part of the{' '}
+                  {commonCollections.map((coll, i) => (
+                    <span key={coll.collection_id}>
+                      {i > 0 && ', '}
+                      <Link
+                        to={`/collections/${coll.collection_id}`}
+                        className="font-semibold text-primary hover:underline underline-offset-2"
+                      >
+                        {coll.name}
+                      </Link>
+                    </span>
+                  ))}
+                  {' '}series
+                </p>
+              </div>
+            )}
+
+            {/* Per-work cards */}
+            <div className="mt-3 space-y-3">
+              {enrichedWorks.map((aw) => {
+                // Group creators by role
+                const roleGroups: Record<string, string[]> = {};
+                for (const c of aw.creators) {
+                  (roleGroups[c.role] ??= []).push(c.display_name);
+                }
+                // Non-common arcs/collections for this work
+                const uniqueArcs = aw.arc_memberships.filter(
+                  (a) => !commonArcIds.has(a.arc_id),
+                );
+                const uniqueColls = aw.collection_memberships.filter(
+                  (c) => !commonCollectionIds.has(c.collection_id),
+                );
+
+                return (
+                  <div
+                    key={aw.id}
+                    className="flex gap-4 rounded-2xl bg-surface-container-low p-4"
+                  >
+                    {/* Cover thumbnail */}
+                    <Link to={`/works/${aw.work_id}`} className="shrink-0">
+                      <CoverImage
+                        workId={aw.work_id}
+                        title={aw.title}
+                        className="w-16 rounded-lg shadow-sm"
+                      />
+                    </Link>
+
+                    {/* Details */}
+                    <div className="flex-1 min-w-0 space-y-1.5">
+                      <div className="flex items-start gap-2">
+                        <Link
+                          to={`/works/${aw.work_id}`}
+                          className="font-headline text-base text-primary hover:underline underline-offset-2 line-clamp-2"
+                        >
+                          {aw.title}
+                        </Link>
+                        {aw.is_partial && (
+                          <span className="shrink-0 mt-0.5 rounded-full bg-tertiary-fixed px-2 py-0.5 font-label text-[10px] font-bold uppercase tracking-widest text-on-tertiary-fixed">
+                            Partial
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Type / Year / Issue */}
+                      <p className="font-label text-xs text-on-surface-variant">
+                        {aw.work_type}
+                        {aw.issue_number && <> · #{aw.issue_number}</>}
+                        {aw.original_publication_year && <> · {aw.original_publication_year}</>}
+                      </p>
+
+                      {/* Creators by role */}
+                      {Object.keys(roleGroups).length > 0 && (
+                        <div className="flex flex-wrap gap-x-4 gap-y-0.5">
+                          {Object.entries(roleGroups).map(([role, names]) => (
+                            <p key={role} className="font-body text-xs text-on-surface-variant">
+                              <span className="text-secondary">{formatRoleLabel(role)}:</span>{' '}
+                              {names.join(', ')}
+                            </p>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Non-common arcs & collections */}
+                      {(uniqueArcs.length > 0 || uniqueColls.length > 0) && (
+                        <div className="flex flex-wrap gap-1.5 pt-0.5">
+                          {uniqueArcs.map((arc) => (
+                            <Link
+                              key={arc.arc_id}
+                              to={`/arcs/${arc.arc_id}`}
+                              className="inline-flex items-center gap-1 rounded-full bg-surface-container-highest px-2 py-0.5 font-label text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors"
+                            >
+                              <span className="material-symbols-outlined text-[12px]">auto_stories</span>
+                              {arc.name}
+                              {arc.arc_position != null && <> #{arc.arc_position}</>}
+                            </Link>
+                          ))}
+                          {uniqueColls.map((coll) => (
+                            <Link
+                              key={coll.collection_id}
+                              to={`/collections/${coll.collection_id}`}
+                              className="inline-flex items-center gap-1 rounded-full bg-surface-container-highest px-2 py-0.5 font-label text-[10px] font-bold text-on-surface-variant hover:text-primary transition-colors"
+                            >
+                              <span className="material-symbols-outlined text-[12px]">collections_bookmark</span>
+                              {coll.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </section>
         )}
 
@@ -798,8 +939,8 @@ export default function ArtifactDetail() {
         )}
 
 
-        {/* Danger Zone */}
-        <section>
+        {/* Danger Zone — only in edit mode */}
+        {isEditing && <section>
           <button
             onClick={() => setDangerExpanded(!dangerExpanded)}
             className="flex w-full items-center gap-2 font-label text-[10px] font-bold uppercase tracking-widest text-error"
@@ -870,7 +1011,7 @@ export default function ArtifactDetail() {
               </div>
             </div>
           )}
-        </section>
+        </section>}
       </div>
 
       {/* Delete Confirmation Dialog */}

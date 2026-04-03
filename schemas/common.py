@@ -101,5 +101,22 @@ class WorkCollectionBrief(OrmBase):
     collection: Optional[CollectionBrief] = None
 
 
+class WorkCreatorBrief(BaseModel):
+    display_name: str
+    role: str
+
+
+class WorkArcMembershipBrief(BaseModel):
+    arc_id: str
+    name: Optional[str] = None
+    arc_position: Optional[int] = None
+
+
+class WorkCollectionMembershipBrief(BaseModel):
+    collection_id: str
+    name: Optional[str] = None
+    sequence_number: Optional[float] = None
+
+
 class MessageResponse(BaseModel):
     detail: str

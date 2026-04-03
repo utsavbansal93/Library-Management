@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 from schemas.common import (
     OrmBase, ArtifactWorkBrief, CopyBrief, VolumeRunBrief,
+    WorkCreatorBrief, WorkArcMembershipBrief, WorkCollectionMembershipBrief,
 )
 
 
@@ -68,6 +69,22 @@ class PaginatedArtifacts(BaseModel):
     total: int
 
 
+class ArtifactWorkEnriched(BaseModel):
+    id: str
+    work_id: str
+    position: int
+    is_partial: bool
+    collects_note: Optional[str] = None
+    title: str
+    work_type: str
+    issue_number: Optional[str] = None
+    original_publication_year: Optional[int] = None
+    subject_tags: Optional[List[str]] = None
+    creators: List[WorkCreatorBrief] = []
+    arc_memberships: List[WorkArcMembershipBrief] = []
+    collection_memberships: List[WorkCollectionMembershipBrief] = []
+
+
 class ArtifactArcMembership(BaseModel):
     arc_id: str
     name: Optional[str] = None
@@ -108,6 +125,7 @@ class ArtifactDetail(OrmBase):
     artifact_works: List[ArtifactWorkBrief] = []
     copies: List[CopyBrief] = []
     creators: List[Any] = []
+    artifact_works_enriched: List[ArtifactWorkEnriched] = []
     arc_memberships: List[ArtifactArcMembership] = []
     collection_memberships: List[ArtifactCollectionMembership] = []
 
