@@ -3,7 +3,9 @@
 from typing import Optional, List
 from datetime import datetime
 
+from pathlib import Path
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import FileResponse, Response
 from sqlalchemy.orm import Session, joinedload
 
 from database import get_db
@@ -41,7 +43,7 @@ def list_works(
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
 ):
-    query = db.query(Work).filter(Work.deleted_at.is_(None))
+    query = db.query(Work)
     if work_type:
         query = query.filter(Work.work_type == work_type)
     if collection:
@@ -74,7 +76,7 @@ def get_work(work_id: str, db: Session = Depends(get_db)):
             joinedload(Work.arc_memberships).joinedload(WorkArcMembership.arc),
             joinedload(Work.work_collections).joinedload(WorkCollection.collection),
         )
-        .filter(Work.work_id == work_id, Work.deleted_at.is_(None))
+        .filter(Work.work_id == work_id)
         .first()
     )
     if not work:
@@ -100,7 +102,7 @@ def update_work(
 ):
     work = (
         db.query(Work)
-        .filter(Work.work_id == work_id, Work.deleted_at.is_(None))
+        .filter(Work.work_id == work_id)
         .first()
     )
     if not work:
@@ -116,10 +118,55 @@ def update_work(
 def delete_work(work_id: str, db: Session = Depends(get_db)):
     work = (
         db.query(Work)
-        .filter(Work.work_id == work_id, Work.deleted_at.is_(None))
+        .filter(Work.work_id == work_id)
         .first()
     )
     if not work:
         raise HTTPException(404, "Work not found")
     work.deleted_at = datetime.utcnow()
     db.commit()
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+@router.get("/works/{work_id}/cover")
+def get_work_cover(work_id: str, db: Session = Depends(get_db)):
+    """Serve a cover image for a work by finding its first linked artifact."""
+    work = db.query(Work).filter(Work.work_id == work_id).first()
+    if not work:
+        raise HTTPException(404, "Work not found")
+
+    artifact_work = (
+        db.query(ArtifactWork)
+        .join(Artifact, ArtifactWork.artifact_id == Artifact.artifact_id)
+        .filter(ArtifactWork.work_id == work_id)
+        .order_by(ArtifactWork.position)
+        .first()
+    )
+    if artifact_work:
+        artifact = db.query(Artifact).filter(
+            Artifact.artifact_id == artifact_work.artifact_id
+        ).first()
+        if artifact and artifact.cover_image_path:
+            file_path = BASE_DIR / artifact.cover_image_path
+            if file_path.is_file():
+                import hashlib
+                etag = hashlib.md5(
+                    f"{artifact.cover_image_path}:{file_path.stat().st_mtime}".encode()
+                ).hexdigest()
+                return FileResponse(
+                    str(file_path),
+                    media_type="image/jpeg",
+                    headers={"Cache-Control": "public, max-age=3600", "ETag": etag},
+                )
+
+    # Fallback: generate placeholder from work title
+    from routers.artifacts import _generate_placeholder_svg
+    fmt = artifact.format if artifact_work and artifact else ""
+    svg = _generate_placeholder_svg(work.title, fmt)
+    return Response(
+        content=svg,
+        media_type="image/svg+xml",
+        headers={"Cache-Control": "public, max-age=3600"},
+    )

@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getCreator } from '../api/creators';
 import { formatRoleLabel } from '../lib/utils';
 import type { CreatorRoleBrief } from '../types';
+import BackButton from '../components/shared/BackButton';
 
 interface GroupedRole {
   role: string;
@@ -70,6 +71,7 @@ export default function CreatorDetail() {
 
   return (
     <div className="min-h-screen bg-surface px-6 py-10 lg:px-12">
+      <BackButton />
       {/* Hero */}
       <header className="mb-10">
         <h1 className="font-headline text-5xl text-primary">{creator.display_name}</h1>
@@ -95,10 +97,10 @@ export default function CreatorDetail() {
                     className={`flex items-center gap-4 px-5 py-3 ${idx > 0 ? '' : ''}`}
                   >
                     <Link
-                      to={`/works/${entry.creator_id}`}
+                      to={entry.target_type === 'artifact' ? `/artifacts/${entry.target_id}` : `/works/${entry.target_id}`}
                       className="min-w-0 flex-1 font-body text-sm font-medium text-on-surface hover:underline"
                     >
-                      {entry.notes ?? entry.role}
+                      {entry.target_title ?? entry.notes ?? 'Untitled'}
                     </Link>
                   </div>
                 ))}

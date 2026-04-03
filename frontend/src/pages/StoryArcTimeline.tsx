@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getArc } from '../api/arcs';
 import CoverImage from '../components/shared/CoverImage';
+import BackButton from '../components/shared/BackButton';
 import type { WorkInArc, ArcBrief } from '../types';
 
 function ProgressBar({ owned, total }: { owned: number; total: number }) {
@@ -27,7 +29,7 @@ function ProgressBar({ owned, total }: { owned: number; total: number }) {
 }
 
 function WorkCard({ work, position }: { work: WorkInArc; position: number }) {
-  const artifactId = work.work?.work_id;
+  const workId = work.work?.work_id;
 
   return (
     <div className="flex items-center gap-4 rounded-2xl bg-surface-container-lowest p-4">
@@ -35,8 +37,8 @@ function WorkCard({ work, position }: { work: WorkInArc; position: number }) {
         {position}
       </span>
       <div className="h-18 w-12 shrink-0 overflow-hidden rounded-lg">
-        {artifactId ? (
-          <CoverImage artifactId={artifactId} title={work.work?.title ?? ''} size="sm" />
+        {workId ? (
+          <CoverImage workId={workId} title={work.work?.title ?? ''} />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-surface-container-high">
             <span className="material-symbols-outlined text-on-surface-variant text-lg">
@@ -62,7 +64,7 @@ function WorkCard({ work, position }: { work: WorkInArc; position: number }) {
   );
 }
 
-function MissingCard({ position }: { position: number }) {
+function MissingCard({ position, volumeRunName }: { position: number; volumeRunName?: string }) {
   return (
     <div className="flex items-center gap-4 rounded-2xl bg-surface-container p-4 opacity-60">
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-container-highest font-label text-xs font-bold text-on-surface-variant">
@@ -77,8 +79,59 @@ function MissingCard({ position }: { position: number }) {
         <span className="font-label text-[10px] font-bold uppercase tracking-widest text-error">
           Missing
         </span>
-        <p className="font-body text-xs text-on-surface-variant">Position {position}</p>
+        <p className="font-body text-xs text-on-surface-variant">
+          {volumeRunName ? `${volumeRunName} #${position}` : `Position ${position}`}
+        </p>
       </div>
+    </div>
+  );
+}
+
+type TimelineItem = { position: number; work: WorkInArc | null };
+
+function IssueGroup({
+  items,
+  volumeRunName,
+  defaultOpen,
+}: {
+  items: TimelineItem[];
+  volumeRunName?: string;
+  defaultOpen: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  const first = items[0].position;
+  const last = items[items.length - 1].position;
+  const missingCount = items.filter((i) => !i.work).length;
+
+  return (
+    <div>
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center gap-2 rounded-xl px-3 py-2 hover:bg-surface-container-low"
+      >
+        <span
+          className={`material-symbols-outlined text-on-surface-variant text-lg transition-transform duration-200 ${open ? 'rotate-90' : ''}`}
+        >
+          chevron_right
+        </span>
+        <span className="font-label text-xs font-bold uppercase tracking-widest text-secondary">
+          Issues {first}–{last}
+        </span>
+        {missingCount > 0 && (
+          <span className="font-label text-[10px] text-error">({missingCount} missing)</span>
+        )}
+      </button>
+      {open && (
+        <div className="mt-1 flex flex-col gap-2 pl-2">
+          {items.map((item) =>
+            item.work ? (
+              <WorkCard key={item.work.work?.work_id ?? item.position} work={item.work} position={item.position} />
+            ) : (
+              <MissingCard key={`missing-${item.position}`} position={item.position} volumeRunName={volumeRunName} />
+            ),
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -123,7 +176,7 @@ export default function StoryArcTimeline() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-surface-container-low px-6 py-10 lg:px-12">
+      <div className="min-h-screen bg-surface px-6 py-10 lg:px-12">
         <div className="mb-6 h-12 w-64 animate-pulse rounded-xl bg-surface-container" />
         <div className="mb-4 h-4 w-48 animate-pulse rounded bg-surface-container" />
         <div className="mb-8 h-2 w-full animate-pulse rounded-full bg-surface-container" />
@@ -138,7 +191,7 @@ export default function StoryArcTimeline() {
 
   if (isError) {
     return (
-      <div className="min-h-screen bg-surface-container-low px-6 py-10 lg:px-12">
+      <div className="min-h-screen bg-surface px-6 py-10 lg:px-12">
         <div className="rounded-2xl bg-error-container p-6 text-on-error-container">
           <p className="font-body text-sm">
             Failed to load story arc. {error instanceof Error ? error.message : 'Unknown error.'}
@@ -163,6 +216,9 @@ export default function StoryArcTimeline() {
     }
   });
 
+  // Detect if arc is volume-run-based (for better missing card labels)
+  const volumeRunName = works.find((w) => w.volume_run)?.volume_run?.name;
+
   // Build the timeline items (including gaps)
   const timelineItems: { position: number; work: WorkInArc | null }[] = [];
   if (totalParts > 0) {
@@ -185,7 +241,8 @@ export default function StoryArcTimeline() {
   }
 
   return (
-    <div className="min-h-screen bg-surface-container-low px-6 py-10 lg:px-12">
+    <div className="min-h-screen bg-surface px-6 py-10 lg:px-12">
+      <BackButton fallback="/stories" />
       {/* Hero */}
       <header className="mb-10">
         <h1 className="font-headline text-5xl text-primary">{arc.name}</h1>
@@ -224,16 +281,35 @@ export default function StoryArcTimeline() {
           Reading Order
         </h2>
         <div className="flex flex-col gap-2">
-          {timelineItems.map((item) =>
-            item.work ? (
-              <WorkCard
-                key={item.work.work?.work_id ?? item.position}
-                work={item.work}
-                position={item.position}
-              />
-            ) : (
-              <MissingCard key={`missing-${item.position}`} position={item.position} />
-            ),
+          {timelineItems.length > 15 ? (
+            // Collapsible groups for large arcs
+            (() => {
+              const GROUP_SIZE = 10;
+              const groups: TimelineItem[][] = [];
+              for (let i = 0; i < timelineItems.length; i += GROUP_SIZE) {
+                groups.push(timelineItems.slice(i, i + GROUP_SIZE));
+              }
+              return groups.map((group, idx) => (
+                <IssueGroup
+                  key={idx}
+                  items={group}
+                  volumeRunName={volumeRunName}
+                  defaultOpen={idx === 0}
+                />
+              ));
+            })()
+          ) : (
+            timelineItems.map((item) =>
+              item.work ? (
+                <WorkCard
+                  key={item.work.work?.work_id ?? item.position}
+                  work={item.work}
+                  position={item.position}
+                />
+              ) : (
+                <MissingCard key={`missing-${item.position}`} position={item.position} volumeRunName={volumeRunName} />
+              ),
+            )
           )}
           {timelineItems.length === 0 && (
             <p className="py-8 text-center font-body text-sm text-on-surface-variant">

@@ -1,41 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface CoverImageProps {
-  artifactId: string;
+  artifactId?: string;
+  workId?: string;
   title: string;
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  /** Cache-bust key — change to force reload (e.g. updated_at timestamp) */
+  version?: string | number | null;
 }
 
-const SIZE_CLASSES: Record<string, string> = {
-  sm: 'w-12 h-18',
-  md: 'w-32 h-48',
-  lg: 'w-48 h-72',
-};
-
-function formatIcon(title: string): string {
+function formatIcon(title: string): { icon: string; bg: string; fg: string } {
   const lower = title.toLowerCase();
-  if (lower.includes('comic') || lower.includes('graphic')) return 'menu_book';
-  if (lower.includes('magazine')) return 'newspaper';
-  if (lower.includes('kindle') || lower.includes('digital')) return 'tablet';
-  return 'auto_stories';
+  if (lower.includes('comic') || lower.includes('graphic'))
+    return { icon: 'menu_book', bg: 'bg-[#1b3a5c]', fg: 'text-[#8bb8e8]' };
+  if (lower.includes('magazine'))
+    return { icon: 'newspaper', bg: 'bg-[#5c1a1a]', fg: 'text-[#e88b8b]' };
+  if (lower.includes('kindle') || lower.includes('digital'))
+    return { icon: 'tablet', bg: 'bg-[#1a3c1a]', fg: 'text-[#8bc88b]' };
+  return { icon: 'auto_stories', bg: 'bg-surface-container-high', fg: 'text-on-surface-variant' };
 }
 
 export default function CoverImage({
   artifactId,
+  workId,
   title,
-  className = '',
-  size = 'md',
+  className = 'w-full',
+  version,
 }: CoverImageProps) {
   const [hasError, setHasError] = useState(false);
 
-  if (hasError) {
+  // Reset error state when the artifact/work changes or version changes
+  useEffect(() => {
+    setHasError(false);
+  }, [artifactId, workId, version]);
+
+  const base = artifactId
+    ? `/api/artifacts/${artifactId}/cover`
+    : workId
+      ? `/api/works/${workId}/cover`
+      : null;
+  const src = base && version ? `${base}?v=${version}` : base;
+
+  if (hasError || !src) {
+    const { icon, bg, fg } = formatIcon(title);
     return (
       <div
-        className={`aspect-[2/3] bg-surface-container-high flex items-center justify-center ${SIZE_CLASSES[size]} ${className}`}
+        className={`${bg} flex flex-col items-center justify-center aspect-[2/3] overflow-hidden ${className}`}
       >
-        <span className="material-symbols-outlined text-on-surface-variant text-3xl">
-          {formatIcon(title)}
+        <span className={`material-symbols-outlined ${fg} text-3xl`}>
+          {icon}
         </span>
       </div>
     );
@@ -43,11 +56,11 @@ export default function CoverImage({
 
   return (
     <img
-      src={`/api/artifacts/${artifactId}/cover`}
+      src={src}
       alt={title}
       loading="lazy"
       onError={() => setHasError(true)}
-      className={`aspect-[2/3] object-cover ${SIZE_CLASSES[size]} ${className}`}
+      className={`object-cover aspect-[2/3] ${className}`}
     />
   );
 }

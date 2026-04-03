@@ -1,23 +1,44 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getArtifact, updateArtifact, deleteArtifact, coverUrl } from '../api/artifacts';
-import type { ArtifactUpdate } from '../types';
-import { ARTIFACT_FORMATS, OWNERS } from '../types';
+import { getArtifact, updateArtifact, deleteArtifact, coverUrl, updateCopy, createCopy, uploadCover } from '../api/artifacts';
+import { useToast } from '../hooks/useToast';
+import type { ArtifactUpdate, CopyUpdate } from '../types';
+import { ARTIFACT_FORMATS, OWNERS, LOCATIONS } from '../types';
 import { cn, formatRoleLabel } from '../lib/utils';
 import CoverImage from '../components/shared/CoverImage';
 import FormatBadge from '../components/shared/FormatBadge';
 import DeleteConfirmDialog from '../components/shared/DeleteConfirmDialog';
+import BackButton from '../components/shared/BackButton';
+
+const DIGITAL_FORMATS = ['Kindle', 'Audible'];
+
+function validLocationsForFormat(format: string): string[] {
+  if (DIGITAL_FORMATS.includes(format)) {
+    return LOCATIONS.filter((l) => l === 'Digital');
+  }
+  return LOCATIONS.filter((l) => l !== 'Digital');
+}
 
 export default function ArtifactDetail() {
   const { artifactId: artifact_id } = useParams<{ artifactId: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState<ArtifactUpdate>({});
+  const [editCopyData, setEditCopyData] = useState<Record<string, CopyUpdate>>({});
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [dangerExpanded, setDangerExpanded] = useState(false);
+  
+  const titleRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (isEditing && titleRef.current) {
+      titleRef.current.style.height = '1px';
+      titleRef.current.style.height = titleRef.current.scrollHeight + 'px';
+    }
+  }, [isEditing, editData.title]);
 
   const {
     data: artifact,
@@ -31,18 +52,31 @@ export default function ArtifactDetail() {
 
   const updateMutation = useMutation({
     mutationFn: (data: ArtifactUpdate) => updateArtifact(artifact_id!, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['artifact', artifact_id] });
-      queryClient.invalidateQueries({ queryKey: ['artifacts'] });
-      setIsEditing(false);
-    },
+  });
+
+  const copyMutation = useMutation({
+    mutationFn: (data: { copyId: string; payload: CopyUpdate }) =>
+      updateCopy(artifact_id!, data.copyId, data.payload),
   });
 
   const deleteMutation = useMutation({
     mutationFn: () => deleteArtifact(artifact_id!),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['artifacts'] });
+      showToast('Artifact removed from library');
       navigate('/');
+    },
+  });
+
+  const addCopyMutation = useMutation({
+    mutationFn: () =>
+      createCopy(artifact_id!, {
+        copy_number: (artifact?.copies.length ?? 0) + 1,
+        location: null,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['artifact', artifact_id] });
+      showToast('Copy added');
     },
   });
 
@@ -65,22 +99,43 @@ export default function ArtifactDetail() {
       is_reprint: artifact.is_reprint,
       original_publisher: artifact.original_publisher,
       owner: artifact.owner,
-      size: artifact.size,
       main_genre: artifact.main_genre,
       sous_genre: artifact.sous_genre,
       goodreads_url: artifact.goodreads_url,
       notes: artifact.notes,
     });
+    if (artifact.copies.length > 0) {
+      const copyMap: Record<string, CopyUpdate> = {};
+      artifact.copies.forEach((c) => {
+        copyMap[c.copy_id] = { location: c.location, borrower_name: c.borrower_name, lent_date: c.lent_date };
+      });
+      setEditCopyData(copyMap);
+    }
     setIsEditing(true);
   }
 
   function cancelEditing() {
     setIsEditing(false);
     setEditData({});
+    setEditCopyData({});
   }
 
-  function handleSave() {
-    updateMutation.mutate(editData);
+  async function handleSave() {
+    try {
+      await updateMutation.mutateAsync(editData);
+      for (const [copyId, payload] of Object.entries(editCopyData)) {
+        if (Object.keys(payload).length > 0) {
+          await copyMutation.mutateAsync({ copyId, payload });
+        }
+      }
+      queryClient.invalidateQueries({ queryKey: ['artifact', artifact_id] });
+      queryClient.invalidateQueries({ queryKey: ['artifacts'] });
+      setIsEditing(false);
+      showToast('Artifact saved successfully');
+    } catch (e) {
+      console.error(e);
+      showToast('Failed to save changes. Please try again.');
+    }
   }
 
   // --- Loading skeleton ---
@@ -138,6 +193,16 @@ export default function ArtifactDetail() {
 
   return (
     <div className="min-h-screen bg-surface">
+      <div className="mx-auto max-w-4xl px-6 pt-6 lg:px-8">
+        <BackButton />
+      </div>
+      {isEditing && (
+        <div className="bg-primary/10 border-b border-primary/20 px-6 py-2 text-center">
+          <span className="font-label text-xs font-bold uppercase tracking-widest text-primary">
+            Editing Mode
+          </span>
+        </div>
+      )}
       {/* Hero Section with blurred cover background */}
       <section className="relative overflow-hidden">
         {/* Blurred background */}
@@ -153,29 +218,45 @@ export default function ArtifactDetail() {
           <div className="absolute inset-0 bg-surface/70" />
         </div>
 
-        <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12 md:flex-row md:items-end lg:px-12">
+        <div className="relative z-10 mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8 md:flex-row md:items-end lg:px-8">
           {/* Cover */}
-          <div className="shrink-0">
+          <div className="shrink-0 relative">
             <CoverImage
               artifactId={artifact.artifact_id}
               title={artifact.title}
+              version={artifact.updated_at}
               className="w-80 aspect-[2/3] rounded-2xl shadow-2xl"
             />
+            {isEditing && (
+              <CoverDropZone
+                artifactId={artifact.artifact_id}
+                onUpload={() => {
+                  queryClient.invalidateQueries({ queryKey: ['artifact', artifact_id] });
+                  showToast('Cover uploaded');
+                }}
+              />
+            )}
           </div>
 
           {/* Title & metadata */}
           <div className="flex-1 space-y-4 pb-4">
             {isEditing ? (
-              <input
-                type="text"
+              <textarea
+                ref={titleRef}
                 value={editData.title ?? ''}
+                rows={1}
+                onInput={(e) => {
+                  const target = e.target as HTMLTextAreaElement;
+                  target.style.height = '1px';
+                  target.style.height = target.scrollHeight + 'px';
+                }}
                 onChange={(e) =>
                   setEditData((d) => ({ ...d, title: e.target.value }))
                 }
-                className="w-full rounded-xl bg-surface-container-low px-4 py-3 font-headline text-5xl text-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full resize-none overflow-hidden bg-transparent font-headline text-4xl leading-tight text-primary md:text-5xl focus:outline-none focus:border-b-2 focus:border-primary/50 border-b border-transparent"
               />
             ) : (
-              <h1 className="font-headline text-7xl text-primary leading-tight">
+              <h1 className="font-headline text-4xl md:text-5xl text-primary leading-tight">
                 {artifact.title}
               </h1>
             )}
@@ -232,7 +313,7 @@ export default function ArtifactDetail() {
                     {formatRoleLabel(cr.role)}{' '}
                     <Link
                       to={`/creators/${cr.creator_id}`}
-                      className="text-primary underline-offset-2 hover:underline"
+                      className={`text-primary underline-offset-2 hover:underline ${cr.creator?.display_name === 'Various' ? 'italic' : ''}`}
                     >
                       {cr.creator?.display_name ?? 'Unknown'}
                     </Link>
@@ -247,10 +328,10 @@ export default function ArtifactDetail() {
                 <>
                   <button
                     onClick={handleSave}
-                    disabled={updateMutation.isPending}
+                    disabled={updateMutation.isPending || copyMutation.isPending}
                     className="rounded-full bg-primary px-6 py-2.5 font-label text-sm font-bold text-on-primary transition-opacity disabled:opacity-50"
                   >
-                    {updateMutation.isPending ? 'Saving...' : 'Save Changes'}
+                    {updateMutation.isPending || copyMutation.isPending ? 'Saving...' : 'Save Changes'}
                   </button>
                   <button
                     onClick={cancelEditing}
@@ -278,32 +359,35 @@ export default function ArtifactDetail() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-5xl space-y-10 px-6 py-10 lg:px-12">
+      <div className="mx-auto max-w-4xl space-y-8 px-6 py-8 lg:px-8">
         {/* Metadata Bento Grid */}
         <section className="grid grid-cols-2 gap-4">
           <MetadataCell
             label="Location"
-            value={artifact.copies[0]?.location ?? 'Not set'}
-          />
-          <MetadataCell
-            label="Condition"
-            value={artifact.copies[0]?.condition ?? 'Unknown'}
-          />
-          <MetadataCell
-            label="Size"
             value={
-              isEditing ? (
-                <input
-                  type="text"
-                  value={editData.size ?? ''}
-                  placeholder="e.g. 6x9 in"
+              isEditing && artifact.copies.length > 0 ? (
+                <select
+                  value={editCopyData[artifact.copies[0]?.copy_id]?.location ?? artifact.copies[0]?.location ?? ''}
                   onChange={(e) =>
-                    setEditData((d) => ({ ...d, size: e.target.value }))
+                    setEditCopyData((d) => ({
+                      ...d,
+                      [artifact.copies[0].copy_id]: {
+                        ...d[artifact.copies[0].copy_id],
+                        location: e.target.value,
+                      },
+                    }))
                   }
-                  className="mt-1 rounded-lg bg-surface-container-low px-2 py-1 font-headline text-xl text-primary focus:outline-none"
-                />
+                  className="mt-1 w-full rounded-lg bg-surface-container-low px-2 py-1 font-headline text-xl text-primary focus:outline-none"
+                >
+                  <option value="">Not set</option>
+                  {validLocationsForFormat(editData.format ?? artifact.format).map((l) => (
+                    <option key={l} value={l}>
+                      {l}
+                    </option>
+                  ))}
+                </select>
               ) : (
-                artifact.size ?? 'Not recorded'
+                artifact.copies[0]?.location ?? 'Not set'
               )
             }
           />
@@ -329,6 +413,143 @@ export default function ArtifactDetail() {
               )
             }
           />
+          <MetadataCell
+            label="Edition Year"
+            value={
+              isEditing ? (
+                <input
+                  type="number"
+                  value={editData.edition_year ?? ''}
+                  onChange={(e) =>
+                    setEditData((d) => ({
+                      ...d,
+                      edition_year: e.target.value ? parseInt(e.target.value, 10) : null,
+                    }))
+                  }
+                  placeholder="e.g. 2023"
+                  className="mt-1 w-full rounded-lg bg-surface-container-low px-2 py-1 font-headline text-xl text-primary focus:outline-none"
+                />
+              ) : (
+                artifact.edition_year ? String(artifact.edition_year) : 'Not set'
+              )
+            }
+          />
+          <MetadataCell
+            label="ISBN / UPC"
+            value={
+              isEditing ? (
+                <input
+                  type="text"
+                  value={editData.isbn_or_upc ?? ''}
+                  onChange={(e) =>
+                    setEditData((d) => ({ ...d, isbn_or_upc: e.target.value || null }))
+                  }
+                  placeholder="ISBN or UPC"
+                  className="mt-1 w-full rounded-lg bg-surface-container-low px-2 py-1 font-headline text-xl text-primary focus:outline-none"
+                />
+              ) : (
+                artifact.isbn_or_upc ?? 'Not set'
+              )
+            }
+          />
+          <MetadataCell
+            label="Genre"
+            value={
+              isEditing ? (
+                <div className="mt-1 flex gap-2">
+                  <input
+                    type="text"
+                    value={editData.main_genre ?? ''}
+                    onChange={(e) =>
+                      setEditData((d) => ({ ...d, main_genre: e.target.value || null }))
+                    }
+                    placeholder="Main genre"
+                    className="w-full rounded-lg bg-surface-container-low px-2 py-1 font-body text-sm text-primary focus:outline-none"
+                  />
+                  <input
+                    type="text"
+                    value={editData.sous_genre ?? ''}
+                    onChange={(e) =>
+                      setEditData((d) => ({ ...d, sous_genre: e.target.value || null }))
+                    }
+                    placeholder="Sub-genre"
+                    className="w-full rounded-lg bg-surface-container-low px-2 py-1 font-body text-sm text-primary focus:outline-none"
+                  />
+                </div>
+              ) : (
+                artifact.main_genre
+                  ? `${artifact.main_genre}${artifact.sous_genre ? ` / ${artifact.sous_genre}` : ''}`
+                  : 'Not set'
+              )
+            }
+          />
+          <MetadataCell
+            label="Reprint"
+            value={
+              isEditing ? (
+                <label className="mt-1 flex items-center gap-2 font-body text-sm text-on-surface">
+                  <input
+                    type="checkbox"
+                    checked={editData.is_reprint ?? false}
+                    onChange={(e) =>
+                      setEditData((d) => ({ ...d, is_reprint: e.target.checked }))
+                    }
+                    className="h-4 w-4 rounded accent-primary"
+                  />
+                  Is Reprint
+                </label>
+              ) : (
+                artifact.is_reprint ? 'Yes' : 'No'
+              )
+            }
+          />
+          {(isEditing || artifact.original_publisher) && (
+            <MetadataCell
+              label="Original Publisher"
+              value={
+                isEditing ? (
+                  <input
+                    type="text"
+                    value={editData.original_publisher ?? ''}
+                    onChange={(e) =>
+                      setEditData((d) => ({ ...d, original_publisher: e.target.value || null }))
+                    }
+                    placeholder="Original publisher"
+                    className="mt-1 w-full rounded-lg bg-surface-container-low px-2 py-1 font-headline text-xl text-primary focus:outline-none"
+                  />
+                ) : (
+                  artifact.original_publisher ?? 'Not set'
+                )
+              }
+            />
+          )}
+          {(isEditing || artifact.goodreads_url) && (
+            <MetadataCell
+              label="Goodreads"
+              value={
+                isEditing ? (
+                  <input
+                    type="url"
+                    value={editData.goodreads_url ?? ''}
+                    onChange={(e) =>
+                      setEditData((d) => ({ ...d, goodreads_url: e.target.value || null }))
+                    }
+                    placeholder="Goodreads URL"
+                    className="mt-1 w-full rounded-lg bg-surface-container-low px-2 py-1 font-body text-sm text-primary focus:outline-none"
+                  />
+                ) : (
+                  <a
+                    href={artifact.goodreads_url!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline-offset-2 hover:underline font-headline text-xl"
+                  >
+                    View on Goodreads
+                  </a>
+                )
+              }
+            />
+          )}
         </section>
 
         {/* Reprint Lineage */}
@@ -338,7 +559,7 @@ export default function ArtifactDetail() {
             <p className="mt-2 font-body text-base text-on-surface">
               Reprints:{' '}
               <Link
-                to={`/volume-runs/${artifact.volume_run.volume_run_id}`}
+                to={`/?volume_run_id=${artifact.volume_run.volume_run_id}`}
                 className="text-primary underline-offset-2 hover:underline"
               >
                 {artifact.volume_run.name}
@@ -347,6 +568,69 @@ export default function ArtifactDetail() {
               {artifact.original_publisher &&
                 ` (${artifact.original_publisher})`}
             </p>
+          </section>
+        )}
+
+        {/* Series & Franchises */}
+        {((artifact.arc_memberships?.length ?? 0) > 0 ||
+          (artifact.collection_memberships?.length ?? 0) > 0) && (
+          <section>
+            <SectionLabel>Part Of</SectionLabel>
+            <div className="mt-3 space-y-2">
+              {artifact.arc_memberships?.map((arc) => (
+                <Link
+                  key={arc.arc_id}
+                  to={`/arcs/${arc.arc_id}`}
+                  className="flex items-center gap-3 rounded-2xl bg-surface-container-low p-4 transition-colors hover:bg-surface-container"
+                >
+                  <span className="material-symbols-outlined text-xl text-primary">
+                    auto_stories
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-headline text-base text-primary truncate">
+                      {arc.name}
+                    </p>
+                    <p className="font-label text-xs text-on-surface-variant">
+                      Story Arc
+                      {arc.arc_position != null && (
+                        <> · #{arc.arc_position}{arc.total_parts ? ` of ${arc.total_parts}` : ''}</>
+                      )}
+                      {arc.completion_status && (
+                        <> · {arc.completion_status}</>
+                      )}
+                    </p>
+                  </div>
+                  <span className="material-symbols-outlined text-sm text-on-surface-variant">
+                    chevron_right
+                  </span>
+                </Link>
+              ))}
+              {artifact.collection_memberships?.map((coll) => (
+                <Link
+                  key={coll.collection_id}
+                  to={`/collections/${coll.collection_id}`}
+                  className="flex items-center gap-3 rounded-2xl bg-surface-container-low p-4 transition-colors hover:bg-surface-container"
+                >
+                  <span className="material-symbols-outlined text-xl text-primary">
+                    collections_bookmark
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-headline text-base text-primary truncate">
+                      {coll.name}
+                    </p>
+                    <p className="font-label text-xs text-on-surface-variant">
+                      {coll.collection_type === 'Franchise' ? 'Franchise' : 'Series'}
+                      {coll.sequence_number != null && (
+                        <> · Book {Number.isInteger(coll.sequence_number) ? coll.sequence_number : coll.sequence_number.toFixed(1)}</>
+                      )}
+                    </p>
+                  </div>
+                  <span className="material-symbols-outlined text-sm text-on-surface-variant">
+                    chevron_right
+                  </span>
+                </Link>
+              ))}
+            </div>
           </section>
         )}
 
@@ -381,41 +665,116 @@ export default function ArtifactDetail() {
         )}
 
         {/* Copies */}
-        {artifact.copies.length > 0 && (
-          <section>
+        <section>
+          <div className="flex items-center justify-between">
             <SectionLabel>Copies</SectionLabel>
-            <div className="mt-3 space-y-3">
-              {artifact.copies.map((copy) => (
-                <div
-                  key={copy.copy_id}
-                  className="rounded-2xl bg-surface-container-low p-4"
-                >
-                  <div className="flex items-baseline justify-between">
-                    <span className="font-headline text-lg text-primary">
-                      Copy #{copy.copy_number}
+            {!isEditing && (
+              <button
+                onClick={() => addCopyMutation.mutate()}
+                disabled={addCopyMutation.isPending}
+                className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 font-label text-xs font-bold text-primary hover:bg-surface-container-low disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[16px]">add</span>
+                Add Copy
+              </button>
+            )}
+          </div>
+          <div className="mt-3 space-y-3">
+            {artifact.copies.map((copy) => (
+              <div
+                key={copy.copy_id}
+                className="rounded-2xl bg-surface-container-low p-4"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-headline text-lg text-primary">
+                    Copy #{copy.copy_number}
+                  </span>
+                  {copy.location === 'Lent' && copy.borrower_name && (
+                    <span className="rounded-full bg-tertiary-fixed px-2.5 py-0.5 font-label text-[10px] font-bold uppercase tracking-widest text-on-tertiary-fixed">
+                      Lent
                     </span>
-                    {copy.condition && (
-                      <span className="font-label text-xs text-on-surface-variant">
-                        {copy.condition}
-                      </span>
-                    )}
-                  </div>
-                  {copy.location && (
-                    <p className="mt-1 font-body text-sm text-on-surface-variant">
-                      {copy.location}
-                    </p>
-                  )}
-                  {copy.borrower_name && (
-                    <p className="mt-1 font-body text-sm text-tertiary-fixed">
-                      Lent to {copy.borrower_name}
-                      {copy.lent_date && ` on ${copy.lent_date}`}
-                    </p>
                   )}
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+                {isEditing ? (
+                  <div className="mt-2 space-y-2">
+                    <select
+                      value={editCopyData[copy.copy_id]?.location ?? copy.location ?? ''}
+                      onChange={(e) =>
+                        setEditCopyData((d) => ({
+                          ...d,
+                          [copy.copy_id]: {
+                            ...d[copy.copy_id],
+                            location: e.target.value,
+                          },
+                        }))
+                      }
+                      className="w-full rounded-lg bg-surface-container px-2 py-1 font-body text-sm text-primary focus:outline-none"
+                    >
+                      <option value="">Not set</option>
+                      {validLocationsForFormat(editData.format ?? artifact.format).map((l) => (
+                        <option key={l} value={l}>
+                          {l}
+                        </option>
+                      ))}
+                    </select>
+                    {(editCopyData[copy.copy_id]?.location ?? copy.location) === 'Lent' && (
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={editCopyData[copy.copy_id]?.borrower_name ?? copy.borrower_name ?? ''}
+                          onChange={(e) =>
+                            setEditCopyData((d) => ({
+                              ...d,
+                              [copy.copy_id]: {
+                                ...d[copy.copy_id],
+                                borrower_name: e.target.value || null,
+                              },
+                            }))
+                          }
+                          placeholder="Borrower name"
+                          className="flex-1 rounded-lg bg-surface-container px-2 py-1 font-body text-sm text-primary focus:outline-none"
+                        />
+                        <input
+                          type="date"
+                          value={editCopyData[copy.copy_id]?.lent_date ?? copy.lent_date ?? ''}
+                          onChange={(e) =>
+                            setEditCopyData((d) => ({
+                              ...d,
+                              [copy.copy_id]: {
+                                ...d[copy.copy_id],
+                                lent_date: e.target.value || null,
+                              },
+                            }))
+                          }
+                          className="rounded-lg bg-surface-container px-2 py-1 font-body text-sm text-primary focus:outline-none"
+                        />
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <>
+                    {copy.location && (
+                      <p className="mt-1 font-body text-sm text-on-surface-variant">
+                        {copy.location}
+                      </p>
+                    )}
+                    {copy.borrower_name && (
+                      <p className="mt-1 font-body text-sm text-tertiary-fixed">
+                        Lent to {copy.borrower_name}
+                        {copy.lent_date && ` on ${copy.lent_date}`}
+                      </p>
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+            {artifact.copies.length === 0 && (
+              <p className="py-4 text-center font-body text-sm text-on-surface-variant">
+                No copies recorded yet.
+              </p>
+            )}
+          </div>
+        </section>
 
         {/* Notes */}
         {(artifact.notes || isEditing) && (
@@ -438,33 +797,6 @@ export default function ArtifactDetail() {
           </section>
         )}
 
-        {/* Genre & ISBN */}
-        {(artifact.main_genre || artifact.isbn_or_upc || artifact.goodreads_url) && (
-          <section>
-            <SectionLabel>Additional Info</SectionLabel>
-            <div className="mt-3 space-y-1 font-body text-sm text-on-surface-variant">
-              {artifact.main_genre && (
-                <p>
-                  Genre: {artifact.main_genre}
-                  {artifact.sous_genre && ` / ${artifact.sous_genre}`}
-                </p>
-              )}
-              {artifact.isbn_or_upc && <p>ISBN/UPC: {artifact.isbn_or_upc}</p>}
-              {artifact.goodreads_url && (
-                <p>
-                  <a
-                    href={artifact.goodreads_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary underline-offset-2 hover:underline"
-                  >
-                    View on Goodreads
-                  </a>
-                </p>
-              )}
-            </div>
-          </section>
-        )}
 
         {/* Danger Zone */}
         <section>
@@ -552,6 +884,71 @@ export default function ArtifactDetail() {
   );
 }
 
+// --- Cover upload drop zone ---
+
+function CoverDropZone({
+  artifactId,
+  onUpload,
+}: {
+  artifactId: string;
+  onUpload: () => void;
+}) {
+  const [isDragging, setIsDragging] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  async function handleFile(file: File) {
+    if (!file.type.startsWith('image/')) return;
+    setIsUploading(true);
+    try {
+      await uploadCover(artifactId, file);
+      onUpload();
+    } catch {
+      // error handled silently
+    } finally {
+      setIsUploading(false);
+    }
+  }
+
+  return (
+    <div
+      className={`absolute inset-0 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed transition-colors cursor-pointer ${
+        isDragging
+          ? 'border-primary bg-primary/20'
+          : 'border-on-surface/30 bg-surface/60 hover:border-primary/50'
+      }`}
+      onClick={() => fileInputRef.current?.click()}
+      onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+      onDragLeave={() => setIsDragging(false)}
+      onDrop={(e) => {
+        e.preventDefault();
+        setIsDragging(false);
+        const file = e.dataTransfer.files[0];
+        if (file) handleFile(file);
+      }}
+    >
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) handleFile(file);
+        }}
+      />
+      {isUploading ? (
+        <span className="material-symbols-outlined text-primary animate-spin text-3xl">progress_activity</span>
+      ) : (
+        <>
+          <span className="material-symbols-outlined text-on-surface/60 text-3xl">upload</span>
+          <span className="mt-1 text-xs text-on-surface/60 font-label">Drop or click to upload cover</span>
+        </>
+      )}
+    </div>
+  );
+}
+
 // --- Helper components ---
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -570,12 +967,12 @@ function MetadataCell({
   value: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl bg-surface-container-low p-5">
+    <div className="rounded-2xl bg-surface-container-low p-4">
       <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
         {label}
       </span>
       {typeof value === 'string' ? (
-        <p className="mt-1 font-headline text-2xl text-primary">{value}</p>
+        <p className="mt-1 font-headline text-xl text-primary">{value}</p>
       ) : (
         <div className="mt-1">{value}</div>
       )}

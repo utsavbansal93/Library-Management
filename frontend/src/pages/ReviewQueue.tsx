@@ -4,10 +4,11 @@ import { listFlags, updateFlag } from '../api/flags';
 import type { FlagSummary } from '../types';
 
 const FLAG_TYPE_STYLES: Record<string, string> = {
-  missing_data: 'bg-tertiary-fixed text-on-tertiary-fixed',
-  duplicate: 'bg-error text-on-error',
-  bad_data: 'bg-secondary text-on-secondary',
-  review_needed: 'bg-primary text-on-primary',
+  name_inconsistency: 'bg-tertiary-fixed text-on-tertiary-fixed',
+  missing_isbn: 'bg-secondary text-on-secondary',
+  conflicting_data: 'bg-error text-on-error',
+  unparsed_collects: 'bg-primary text-on-primary',
+  missing_metadata: 'bg-surface-container-highest text-on-surface-variant',
 };
 
 function flagTypeStyle(type: string): string {

@@ -1,14 +1,14 @@
 """Global search endpoint across all entity types."""
 
 from fastapi import APIRouter, Depends, Query, HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from database import get_db
 from models import Artifact, Work, Creator, Collection, StoryArc
 from schemas.search import SearchResults
-from schemas.common import (
-    ArtifactBrief, WorkBrief, CreatorBrief, CollectionBrief, ArcBrief,
-)
+from schemas.common import CreatorBrief, CollectionBrief, ArcBrief
+from schemas.artifacts import ArtifactSummary
+from schemas.works import WorkSummary
 
 router = APIRouter(tags=["search"])
 
@@ -24,14 +24,16 @@ def global_search(
 
     artifacts = (
         db.query(Artifact)
-        .filter(Artifact.deleted_at.is_(None), Artifact.title.ilike(pattern))
+        .options(joinedload(Artifact.volume_run))
+        .filter(Artifact.title.ilike(pattern))
         .limit(MAX_PER_TYPE)
         .all()
     )
 
     works = (
         db.query(Work)
-        .filter(Work.deleted_at.is_(None), Work.title.ilike(pattern))
+        .options(joinedload(Work.volume_run))
+        .filter(Work.title.ilike(pattern))
         .limit(MAX_PER_TYPE)
         .all()
     )
@@ -61,8 +63,8 @@ def global_search(
     )
 
     return SearchResults(
-        artifacts=[ArtifactBrief.model_validate(a) for a in artifacts],
-        works=[WorkBrief.model_validate(w) for w in works],
+        artifacts=[ArtifactSummary.model_validate(a) for a in artifacts],
+        works=[WorkSummary.model_validate(w) for w in works],
         creators=[CreatorBrief.model_validate(c) for c in creators],
         collections=[CollectionBrief.model_validate(c) for c in collections],
         arcs=[ArcBrief.model_validate(a) for a in arcs],

@@ -1,27 +1,30 @@
 import { useState, useCallback } from 'react';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import TopNav from './TopNav';
 import Sidebar from './Sidebar';
 
 export default function AppShell() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const activeCategory = searchParams.get('category') || 'all';
+  // Consider active only if we are on the library index page
+  const activeCategory = location.pathname === '/' 
+    ? (searchParams.get('category') || 'all') 
+    : '';
 
   const handleCategoryChange = useCallback(
     (category: string) => {
-      setSearchParams((prev) => {
-        const next = new URLSearchParams(prev);
-        if (category === 'all') {
-          next.delete('category');
-        } else {
-          next.set('category', category);
-        }
-        return next;
-      });
+      const next = new URLSearchParams(searchParams);
+      if (category === 'all') {
+        next.delete('category');
+      } else {
+        next.set('category', category);
+      }
+      navigate({ pathname: '/', search: next.toString() });
     },
-    [setSearchParams],
+    [navigate, searchParams],
   );
 
   return (

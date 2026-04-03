@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { listArtifacts } from '../api/artifacts';
 import type { ArtifactListParams } from '../api/artifacts';
 import { cn } from '../lib/utils';
+import { ARTIFACT_FORMATS, OWNERS, LOCATIONS } from '../types';
 import ArtifactCard from '../components/cards/ArtifactCard';
 import ArtifactListRow from '../components/cards/ArtifactListRow';
 import ViewToggle from '../components/shared/ViewToggle';
@@ -26,6 +27,10 @@ export default function MyLibrary() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>(getStoredView);
 
   const format = searchParams.get('format') ?? undefined;
+  const category = searchParams.get('category') ?? undefined;
+  const volume_run_id = searchParams.get('volume_run_id') ?? undefined;
+  const owner = searchParams.get('owner') ?? undefined;
+  const location = searchParams.get('location') ?? undefined;
   const q = searchParams.get('q') ?? '';
   const sort = (searchParams.get('sort') as SortOption) ?? 'title';
   const page = parseInt(searchParams.get('page') ?? '1', 10);
@@ -52,6 +57,10 @@ export default function MyLibrary() {
 
   const params: ArtifactListParams = {
     format: format,
+    category: category,
+    volume_run_id: volume_run_id,
+    owner: owner,
+    location: location,
     q: q || undefined,
     sort,
     offset: (page - 1) * PER_PAGE,
@@ -85,10 +94,10 @@ export default function MyLibrary() {
   }
 
   return (
-    <div className="min-h-screen bg-surface px-6 py-10 lg:px-12">
-      {/* Header */}
-      <header className="mb-10">
-        <h1 className="font-headline text-5xl text-primary">Master Ledger</h1>
+    <div className="min-h-screen bg-surface px-6 py-8 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <header className="mb-6 px-2 flex justify-between items-end">
+          <h1 className="font-headline text-4xl text-primary">The Archives</h1>
         <p className="mt-2 font-body text-base text-on-surface-variant">
           {isLoading
             ? 'Loading artifacts...'
@@ -97,7 +106,7 @@ export default function MyLibrary() {
       </header>
 
       {/* Toolbar */}
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         {/* Search */}
         <div className="relative max-w-md flex-1">
           <input
@@ -134,6 +143,56 @@ export default function MyLibrary() {
           />
           <ViewToggle view={viewMode} onChange={setViewMode} />
         </div>
+      </div>
+
+      {/* Filters */}
+      <div className="mb-8 flex flex-wrap items-center gap-2">
+        <select
+          value={format ?? ''}
+          onChange={(e) => updateParam('format', e.target.value)}
+          className="rounded-lg bg-surface-container-low px-3 py-1.5 font-body text-xs text-on-surface focus:outline-none"
+        >
+          <option value="">All Formats</option>
+          {ARTIFACT_FORMATS.map((f) => (
+            <option key={f} value={f}>{f}</option>
+          ))}
+        </select>
+        <select
+          value={owner ?? ''}
+          onChange={(e) => updateParam('owner', e.target.value)}
+          className="rounded-lg bg-surface-container-low px-3 py-1.5 font-body text-xs text-on-surface focus:outline-none"
+        >
+          <option value="">All Owners</option>
+          {OWNERS.map((o) => (
+            <option key={o} value={o}>{o}</option>
+          ))}
+        </select>
+        <select
+          value={location ?? ''}
+          onChange={(e) => updateParam('location', e.target.value)}
+          className="rounded-lg bg-surface-container-low px-3 py-1.5 font-body text-xs text-on-surface focus:outline-none"
+        >
+          <option value="">All Locations</option>
+          {LOCATIONS.map((l) => (
+            <option key={l} value={l}>{l}</option>
+          ))}
+        </select>
+        {(format || owner || location || volume_run_id) && (
+          <button
+            onClick={() => {
+              const next = new URLSearchParams(searchParams);
+              next.delete('format');
+              next.delete('owner');
+              next.delete('location');
+              next.delete('volume_run_id');
+              next.delete('page');
+              setSearchParams(next);
+            }}
+            className="rounded-lg px-3 py-1.5 font-body text-xs text-error hover:bg-error-container"
+          >
+            Clear Filters
+          </button>
+        )}
       </div>
 
       {/* Content */}
@@ -211,6 +270,7 @@ export default function MyLibrary() {
                         Owner
                       </span>
                     </th>
+                    <th className="px-4 py-3 w-10"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -226,7 +286,10 @@ export default function MyLibrary() {
           )}
 
           {/* Pagination */}
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-col items-center gap-2">
+            <p className="font-body text-xs text-on-surface-variant">
+              Showing {Math.min((page - 1) * PER_PAGE + 1, totalItems)}–{Math.min(page * PER_PAGE, totalItems)} of {totalItems}
+            </p>
             <Pagination
               page={page}
               totalPages={totalPages}
@@ -235,6 +298,7 @@ export default function MyLibrary() {
           </div>
         </>
       )}
+      </div>
     </div>
   );
 }

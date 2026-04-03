@@ -4,14 +4,14 @@ from typing import List
 
 from pydantic import BaseModel
 
-from schemas.common import (
-    ArtifactBrief, WorkBrief, CreatorBrief, CollectionBrief, ArcBrief,
-)
+from schemas.common import CreatorBrief, CollectionBrief, ArcBrief
+from schemas.artifacts import ArtifactSummary
+from schemas.works import WorkSummary
 
 
 class SearchResults(BaseModel):
-    artifacts: List[ArtifactBrief] = []
-    works: List[WorkBrief] = []
+    artifacts: List[ArtifactSummary] = []
+    works: List[WorkSummary] = []
     creators: List[CreatorBrief] = []
     collections: List[CollectionBrief] = []
     arcs: List[ArcBrief] = []

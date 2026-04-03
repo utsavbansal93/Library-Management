@@ -17,9 +17,13 @@ Library-Management/
 ├── .gitignore                  # Git ignore rules
 ├── .env                        # Local secrets (gitignored) — COMICVINE_API_KEY
 │
-├── cover_images/               # Scraped cover images (671+ files, ~30 MB)
-│   └── *.jpg                   # Named by convention: novel_{ISBN}.jpg, issue_{vol}_{num}.jpg, etc.
-├── cover_manifest.csv          # Per-item scrape log: filename, source, status, error_detail
+├── cover_images/               # Scraped cover images (named by convention: novel_{ISBN}.jpg, cv_{id}.jpg, etc.)
+├── cover_manifest.csv          # Original scrape manifest (1,062 entries) — now superseded by scrape_log table
+├── scrape_covers.py            # Reusable cover scraper (OpenLibrary, Google Books, ComicVine) with audit logging
+├── fix_orphaned_artifacts.py   # Data fix script: finds artifacts with no Work link and creates one
+├── fix_unparsed_collects.py    # Data fix script: re-parses collects fields with semicolons/plus signs
+├── find_duplicate_arcs.py     # Data fix script: finds duplicate story arc names (read-only)
+├── fix_typos.py               # Data fix script: corrects known typos in titles/names
 │
 ├── schemas/                    # Pydantic request/response models
 │   ├── __init__.py
@@ -35,7 +39,7 @@ Library-Management/
 │
 ├── routers/                    # FastAPI route handlers (one file per domain)
 │   ├── __init__.py
-│   ├── artifacts.py            # Artifact CRUD + copy creation (6 endpoints)
+│   ├── artifacts.py            # Artifact CRUD + copy creation + cover upload (8 endpoints)
 │   ├── works.py                # Work CRUD (5 endpoints)
 │   ├── collections.py          # Collection CRUD + tree view (4 endpoints)
 │   ├── arcs.py                 # StoryArc CRUD + tree view + cross-volume order (4 endpoints)
@@ -67,15 +71,22 @@ Library-Management/
 │   └── src/
 │       ├── api/                # API client wrappers (one per domain)
 │       ├── components/         # Reusable UI components
-│       ├── hooks/              # Custom React hooks (useProfile, etc.)
+│       │   ├── shared/
+│       │   │   ├── BackButton.tsx     # Back navigation button with history fallback
+│       │   │   ├── FormatBrowse.tsx   # Reusable paginated browse page for format categories
+│       │   │   ├── TagInput.tsx      # Pill-based tag editor with add/remove UX
+│       │   │   └── ...               # CoverImage, Pagination, ViewToggle, SortDropdown, etc.
+│       ├── hooks/              # Custom React hooks (useProfile, useToast, etc.)
 │       ├── lib/                # Utility functions (cn, coverUrl, etc.)
 │       ├── types/              # TypeScript interfaces matching backend schemas
 │       └── pages/              # Page-level route components
 │           ├── MyLibrary.tsx   # Main browse page — grid/list view, search, filter, sort
+│           ├── Settings.tsx    # User preferences (Theme, Library home) stored in localStorage
 │           ├── ArtifactDetail.tsx  # Full artifact detail with inline editing & danger zone
-│           ├── WorkDetail.tsx  # Work detail with series/arc navigation & cross-references
+│           ├── WorkDetail.tsx  # Work detail with edit mode, activity logging, series/arc navigation
 │           ├── StoryArcTimeline.tsx  # Arc detail with reading order, progress bar, sub-arcs
 │           ├── ComicsBrowse.tsx     # Comics hub: Arcs tree, Graphic Novels grid, Issues grid
+│           ├── StoriesBrowse.tsx    # Stories hub — tabbed Arcs/Collections with search filter
 │           ├── NovelsBrowse.tsx     # Novels grid (Hardcover, Paperback, Kindle, Audible)
 │           ├── NonFictionBrowse.tsx # Non-fiction artifacts grid
 │           ├── MagazinesBrowse.tsx  # Magazines grid filtered by format

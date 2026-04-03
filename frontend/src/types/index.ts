@@ -12,6 +12,9 @@ export interface CreatorRoleBrief {
   id: string;
   creator_id: string;
   role: string;
+  target_type?: string | null;
+  target_id?: string | null;
+  target_title?: string | null;
   notes?: string | null;
   creator?: CreatorBrief | null;
 }
@@ -105,7 +108,6 @@ export interface ArtifactCreate {
   is_pirated?: boolean;
   issue_number?: string | null;
   volume_run_id?: string | null;
-  size?: string | null;
   main_genre?: string | null;
   sous_genre?: string | null;
   goodreads_url?: string | null;
@@ -126,7 +128,6 @@ export interface ArtifactUpdate {
   is_pirated?: boolean | null;
   issue_number?: string | null;
   volume_run_id?: string | null;
-  size?: string | null;
   main_genre?: string | null;
   sous_genre?: string | null;
   goodreads_url?: string | null;
@@ -141,6 +142,9 @@ export interface ArtifactSummary {
   publisher?: string | null;
   owner?: string | null;
   issue_number?: string | null;
+  is_reprint?: boolean;
+  original_publisher?: string | null;
+  is_lent?: boolean;
   cover_image_path?: string | null;
   volume_run?: VolumeRunBrief | null;
 }
@@ -148,6 +152,21 @@ export interface ArtifactSummary {
 export interface PaginatedArtifacts {
   items: ArtifactSummary[];
   total: number;
+}
+
+export interface ArtifactArcMembership {
+  arc_id: string;
+  name?: string | null;
+  arc_position?: number | null;
+  total_parts?: number | null;
+  completion_status?: string | null;
+}
+
+export interface ArtifactCollectionMembership {
+  collection_id: string;
+  name?: string | null;
+  collection_type?: string | null;
+  sequence_number?: number | null;
 }
 
 export interface ArtifactDetail {
@@ -164,7 +183,6 @@ export interface ArtifactDetail {
   is_pirated: boolean;
   issue_number?: string | null;
   volume_run_id?: string | null;
-  size?: string | null;
   main_genre?: string | null;
   sous_genre?: string | null;
   goodreads_url?: string | null;
@@ -176,13 +194,23 @@ export interface ArtifactDetail {
   artifact_works: ArtifactWorkBrief[];
   copies: CopyBrief[];
   creators: CreatorRoleBrief[];
+  arc_memberships: ArtifactArcMembership[];
+  collection_memberships: ArtifactCollectionMembership[];
 }
 
 export interface CopyCreate {
   copy_number?: number;
   internal_sku?: string | null;
   location?: string | null;
-  condition?: string | null;
+  notes?: string | null;
+}
+
+export interface CopyUpdate {
+  copy_number?: number | null;
+  internal_sku?: string | null;
+  location?: string | null;
+  borrower_name?: string | null;
+  lent_date?: string | null;
   notes?: string | null;
 }
 
@@ -192,7 +220,6 @@ export interface CopyDetail {
   copy_number: number;
   internal_sku?: string | null;
   location?: string | null;
-  condition?: string | null;
   borrower_name?: string | null;
   lent_date?: string | null;
   notes?: string | null;
@@ -279,6 +306,7 @@ export interface CollectionSummary {
 export interface WorkInCollection {
   work: WorkBrief;
   sequence_number?: number | null;
+  artifact_count?: number;
 }
 
 export interface CollectionDetail extends CollectionSummary {
@@ -404,8 +432,8 @@ export interface FlagUpdate {
 // --- Search types ---
 
 export interface SearchResults {
-  artifacts: ArtifactBrief[];
-  works: WorkBrief[];
+  artifacts: ArtifactSummary[];
+  works: WorkSummary[];
   creators: CreatorBrief[];
   collections: CollectionBrief[];
   arcs: ArcBrief[];

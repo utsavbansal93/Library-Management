@@ -1,11 +1,20 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { globalSearch } from '../api/search';
+import CoverImage from '../components/shared/CoverImage';
+
+const MAX_PER_TYPE = 20;
 
 function SectionHeading({ title, count }: { title: string; count: number }) {
+  const capped = count >= MAX_PER_TYPE;
   return (
     <h2 className="mb-3 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
-      {title} ({count})
+      {title} ({capped ? `${count}+` : count})
+      {capped && (
+        <span className="ml-2 font-body text-[10px] normal-case tracking-normal text-on-surface-variant">
+          — showing first {MAX_PER_TYPE}, refine your search for more
+        </span>
+      )}
     </h2>
   );
 }
@@ -135,18 +144,36 @@ export default function SearchResults() {
           {results.artifacts.length > 0 && (
             <section>
               <SectionHeading title="Artifacts" count={results.artifacts.length} />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 {results.artifacts.map((a) => (
                   <Link
                     key={a.artifact_id}
                     to={`/artifacts/${a.artifact_id}`}
-                    className="flex items-center gap-3 rounded-xl px-4 py-3 font-body text-sm text-on-surface hover:bg-surface-container-low"
+                    className="group flex items-center gap-4 rounded-xl pr-4 transition-colors hover:bg-surface-container-low"
                   >
-                    <span className="material-symbols-outlined text-secondary text-lg">
-                      auto_stories
+                    <div className="w-14 overflow-hidden rounded-l-xl shrink-0 shadow-sm leading-[0]">
+                      <CoverImage
+                        artifactId={a.artifact_id}
+                        title={a.title}
+                        className="w-full h-auto aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0 py-2">
+                      <h4 className="font-headline text-sm text-on-surface font-semibold truncate">
+                        {a.title}
+                      </h4>
+                      {a.publisher && (
+                        <p className="font-body text-xs text-on-surface-variant truncate mt-0.5">
+                          {a.publisher}
+                        </p>
+                      )}
+                    </div>
+                    <div className="shrink-0 hidden sm:block">
+                      <Badge>{a.format}</Badge>
+                    </div>
+                    <span className="material-symbols-outlined text-outline-variant text-[18px] opacity-0 group-hover:opacity-100 transition-opacity">
+                      chevron_right
                     </span>
-                    <span className="flex-1">{a.title}</span>
-                    <Badge>{a.format}</Badge>
                   </Link>
                 ))}
               </div>

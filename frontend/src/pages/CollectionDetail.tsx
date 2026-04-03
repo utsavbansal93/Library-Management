@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getCollection } from '../api/collections';
+import BackButton from '../components/shared/BackButton';
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
@@ -80,13 +81,12 @@ export default function CollectionDetail() {
     (a, b) => (a.sequence_number ?? 0) - (b.sequence_number ?? 0),
   );
 
-  // Count works that have an artifact (very rough heuristic: works with artifact_works)
-  // Since WorkInCollection only has WorkBrief, we count all works for total
-  // and can't determine which have artifacts at this level. Show total count only.
   const totalWorks = works.length;
+  const ownedWorks = works.filter((w) => (w.artifact_count ?? 0) > 0).length;
 
   return (
     <div className="min-h-screen bg-surface px-6 py-10 lg:px-12">
+      <BackButton />
       {/* Hero */}
       <header className="mb-8">
         <div className="mb-2 flex items-center gap-3">
@@ -103,7 +103,7 @@ export default function CollectionDetail() {
       {/* Progress */}
       {totalWorks > 0 && (
         <div className="mb-10">
-          <ProgressBar owned={totalWorks} total={totalWorks} />
+          <ProgressBar owned={ownedWorks} total={totalWorks} />
         </div>
       )}
 
@@ -120,7 +120,11 @@ export default function CollectionDetail() {
                 className={`flex items-center gap-4 px-5 py-3 ${idx > 0 ? 'bg-surface-container-lowest' : ''}`}
               >
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-container-highest font-label text-[10px] font-bold text-on-surface-variant">
-                  {entry.sequence_number ?? idx + 1}
+                  {entry.sequence_number != null
+                    ? Number.isInteger(entry.sequence_number)
+                      ? entry.sequence_number
+                      : entry.sequence_number.toFixed(1)
+                    : idx + 1}
                 </span>
                 <Link
                   to={`/works/${entry.work.work_id}`}

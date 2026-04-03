@@ -34,6 +34,7 @@ class CollectionSummary(OrmBase):
 class WorkInCollection(OrmBase):
     work: WorkBrief
     sequence_number: Optional[float] = None
+    artifact_count: int = 0
 
 
 class CollectionDetail(CollectionSummary):

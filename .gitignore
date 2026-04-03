@@ -7,3 +7,4 @@ __pycache__/
 *.pyc
 cover_images/
 cover_manifest.csv
+logs/

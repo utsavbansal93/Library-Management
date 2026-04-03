@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
   activeCategory: string;
@@ -19,6 +20,7 @@ function SidebarContent({
   activeCategory,
   onCategoryChange,
 }: Pick<SidebarProps, 'activeCategory' | 'onCategoryChange'>) {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
@@ -58,7 +60,7 @@ function SidebarContent({
 
       {/* Add button */}
       <div className="px-4 pb-6">
-        <button className="w-full flex items-center justify-center gap-2 bg-primary text-on-primary rounded-xl py-3 font-body text-sm font-semibold transition-colors hover:bg-primary-container">
+        <button onClick={() => navigate('/add')} className="w-full flex items-center justify-center gap-2 bg-primary text-on-primary rounded-xl py-3 font-body text-sm font-semibold transition-colors hover:bg-primary-container">
           <span className="material-symbols-outlined text-[18px]">add</span>
           Add to Library
         </button>

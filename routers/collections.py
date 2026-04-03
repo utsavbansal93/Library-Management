@@ -3,10 +3,11 @@
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 
 from database import get_db
-from models import Collection, WorkCollection, _uuid
+from models import Collection, WorkCollection, ArtifactWork, _uuid
 from schemas.collections import (
     CollectionCreate, CollectionUpdate, CollectionSummary,
     CollectionDetail, CollectionTree, WorkInCollection,
@@ -70,10 +71,23 @@ def get_collection(collection_id: str, db: Session = Depends(get_db)):
         .order_by(WorkCollection.sequence_number)
         .all()
     )
+    # Count artifacts per work in one query
+    work_ids = [wc.work.work_id for wc in wc_rows]
+    artifact_counts = {}
+    if work_ids:
+        counts = (
+            db.query(ArtifactWork.work_id, func.count(ArtifactWork.id))
+            .filter(ArtifactWork.work_id.in_(work_ids))
+            .group_by(ArtifactWork.work_id)
+            .all()
+        )
+        artifact_counts = {wid: cnt for wid, cnt in counts}
+
     works = [
         WorkInCollection(
             work=WorkBrief.model_validate(wc.work),
             sequence_number=wc.sequence_number,
+            artifact_count=artifact_counts.get(wc.work.work_id, 0),
         )
         for wc in wc_rows
     ]

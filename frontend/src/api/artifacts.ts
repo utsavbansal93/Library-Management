@@ -1,14 +1,16 @@
 import { get, post, put, del } from './client';
 import type {
   ArtifactDetail, ArtifactCreate, ArtifactUpdate,
-  PaginatedArtifacts, CopyCreate, CopyDetail,
+  PaginatedArtifacts, CopyCreate, CopyDetail, CopyUpdate,
 } from '../types';
 
 export interface ArtifactListParams {
   format?: string;
+  category?: string;
   publisher?: string;
   location?: string;
   owner?: string;
+  volume_run_id?: string;
   q?: string;
   sort?: string;
   offset?: number;
@@ -46,6 +48,28 @@ export function createCopy(artifactId: string, data: CopyCreate): Promise<CopyDe
   return post<CopyDetail>(`/artifacts/${artifactId}/copies`, data);
 }
 
+export function updateCopy(
+  artifactId: string,
+  copyId: string,
+  data: CopyUpdate
+): Promise<CopyDetail> {
+  return put<CopyDetail>(`/artifacts/${artifactId}/copies/${copyId}`, data);
+}
+
 export function coverUrl(artifactId: string): string {
   return `/api/artifacts/${artifactId}/cover`;
+}
+
+export async function uploadCover(
+  artifactId: string,
+  file: File,
+): Promise<{ cover_image_path: string }> {
+  const form = new FormData();
+  form.append('file', file);
+  const res = await fetch(`/api/artifacts/${artifactId}/cover`, {
+    method: 'POST',
+    body: form,
+  });
+  if (!res.ok) throw new Error('Upload failed');
+  return res.json();
 }

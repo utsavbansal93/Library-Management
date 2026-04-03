@@ -44,13 +44,13 @@ export default function DeleteConfirmDialog({
       />
 
       {/* Card */}
-      <div className="relative bg-surface-container-lowest rounded-xl shadow-[0_20px_60px_rgba(27,28,25,0.16)] p-6 max-w-sm w-full mx-4">
+      <div className="relative bg-surface-container-lowest/80 backdrop-blur-xl rounded-xl shadow-[0_20px_60px_rgba(27,28,25,0.25)] p-6 max-w-sm w-full mx-4">
         <h3 className="font-headline text-lg text-on-surface mb-3">
           Delete Item
         </h3>
         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6">
           Are you sure you want to delete <strong className="text-on-surface">{title}</strong>?
-          This cannot be undone.
+          This will remove it from your library.
         </p>
 
         <div className="flex items-center justify-end gap-3">

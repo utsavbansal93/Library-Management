@@ -21,6 +21,7 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [profileOpen, setProfileOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
 
   // Close profile dropdown on outside click
@@ -40,11 +41,11 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
     }
   }
 
-  const initial = profile ? profile.charAt(0).toUpperCase() : '?';
+  const initial = profile ? profile.slice(0, 2) : '?';
 
   return (
     <header className="sticky top-0 z-50 bg-[#fbf9f4]/80 glass-nav">
-      <div className="flex items-center justify-between px-6 h-14">
+      <div className="flex items-center justify-between px-4 sm:px-6 h-14 gap-2">
         {/* Left section */}
         <div className="flex items-center gap-8">
           {/* Mobile hamburger */}
@@ -64,7 +65,7 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
           </Link>
 
           {/* Desktop nav links */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-6 overflow-x-auto">
             {NAV_LINKS.map((link) => {
               const isActive =
                 link.to === '/'
@@ -89,7 +90,16 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
 
         {/* Right section */}
         <div className="flex items-center gap-4">
-          {/* Search */}
+          {/* Mobile search icon */}
+          <button
+            onClick={() => setMobileSearchOpen((prev) => !prev)}
+            className="sm:hidden flex items-center justify-center text-outline-variant hover:text-primary transition-colors"
+            aria-label="Search"
+          >
+            <span className="material-symbols-outlined text-[20px]">search</span>
+          </button>
+
+          {/* Desktop Search */}
           <div className="relative hidden sm:block">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">
               search
@@ -99,7 +109,7 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearch}
-              placeholder="Search the archives..."
+              placeholder="Search the archives… ↵"
               className="bg-surface-container-low rounded-xl pl-10 pr-4 py-2 text-sm font-headline italic text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 w-56 transition-all focus:w-72"
             />
           </div>
@@ -115,7 +125,7 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
             </button>
 
             {profileOpen && (
-              <div className="absolute right-0 top-full mt-2 w-44 bg-surface-container-lowest rounded-xl shadow-[0_10px_30px_rgba(27,28,25,0.12)] overflow-hidden">
+              <div className="absolute z-[100] right-0 top-full mt-2 w-44 bg-surface-container-lowest rounded-xl shadow-[0_10px_30px_rgba(27,28,25,0.12)] overflow-hidden">
                 <div className="px-4 py-2">
                   <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">
                     Switch Profile
@@ -128,12 +138,15 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
                       setProfile(p as Profile);
                       setProfileOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-2.5 font-body text-sm transition-colors ${
+                    className={`w-full text-left px-4 py-2.5 font-body text-sm transition-colors flex items-center gap-2 ${
                       profile === p
                         ? 'bg-surface-container-high font-semibold text-primary'
                         : 'text-on-surface hover:bg-surface-container-low'
                     }`}
                   >
+                    {profile === p && (
+                      <span className="material-symbols-outlined text-[16px] text-primary">check</span>
+                    )}
                     {p}
                   </button>
                 ))}
@@ -143,6 +156,7 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
 
           {/* Settings icon */}
           <button
+            onClick={() => navigate('/settings')}
             className="text-secondary hover:text-primary transition-colors"
             aria-label="Settings"
           >
@@ -153,6 +167,31 @@ export default function TopNav({ onMenuToggle }: TopNavProps) {
 
       {/* Subtle divider */}
       <div className="bg-[#f2efe4] h-[1px]" />
+
+      {/* Mobile Search Overlay */}
+      {mobileSearchOpen && (
+        <div className="sm:hidden absolute top-full left-0 right-0 bg-[#fbf9f4] p-4 shadow-md border-b border-[#f2efe4] z-40">
+          <div className="relative">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">
+              search
+            </span>
+            <input
+              autoFocus
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setMobileSearchOpen(false);
+                  handleSearch(e);
+                }
+              }}
+              placeholder="Search the archives..."
+              className="bg-surface-container-low w-full rounded-xl pl-10 pr-4 py-3 text-sm font-headline italic text-on-surface placeholder:text-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20"
+            />
+          </div>
+        </div>
+      )}
     </header>
   );
 }

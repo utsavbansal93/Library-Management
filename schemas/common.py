@@ -21,6 +21,9 @@ class CreatorRoleBrief(OrmBase):
     id: str
     creator_id: str
     role: str
+    target_type: Optional[str] = None
+    target_id: Optional[str] = None
+    target_title: Optional[str] = None
     notes: Optional[str] = None
     creator: Optional[CreatorBrief] = None
 
@@ -62,7 +65,6 @@ class CopyBrief(OrmBase):
     copy_id: str
     copy_number: int
     location: Optional[str] = None
-    condition: Optional[str] = None
     borrower_name: Optional[str] = None
     lent_date: Optional[Any] = None
 

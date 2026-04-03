@@ -11,7 +11,7 @@ from datetime import datetime, date
 
 from sqlalchemy import (
     Column, String, Text, Integer, Float, Boolean, DateTime, Date,
-    JSON, ForeignKey, UniqueConstraint, Index, create_engine,
+    JSON, ForeignKey, UniqueConstraint, Index, create_engine, event,
 )
 from sqlalchemy.orm import DeclarativeBase, relationship, sessionmaker
 
@@ -21,8 +21,19 @@ from sqlalchemy.orm import DeclarativeBase, relationship, sessionmaker
 # ---------------------------------------------------------------------------
 
 DB_PATH = "utskomia.db"
-ENGINE = create_engine(f"sqlite:///{DB_PATH}", echo=False)
+ENGINE = create_engine(
+    f"sqlite:///{DB_PATH}",
+    echo=False,
+    connect_args={"timeout": 15},
+)
 SessionLocal = sessionmaker(bind=ENGINE)
+
+
+@event.listens_for(ENGINE, "connect")
+def _set_sqlite_pragmas(dbapi_conn, connection_record):
+    cursor = dbapi_conn.cursor()
+    cursor.execute("PRAGMA journal_mode=WAL")
+    cursor.close()
 
 
 def _uuid() -> str:
@@ -146,10 +157,6 @@ class FlagStatus(str, enum.Enum):
     RESOLVED = "resolved"
     DISMISSED = "dismissed"
 
-
-class ArtifactSize(str, enum.Enum):
-    LARGE = "Large"
-    SMALL = "Small"
 
 
 # ---------------------------------------------------------------------------
@@ -328,7 +335,6 @@ class Artifact(Base):
     is_pirated = Column(Boolean, nullable=False, default=False)
     issue_number = Column(Text, nullable=True)
     volume_run_id = Column(String(36), ForeignKey("volume_runs.volume_run_id"), nullable=True)
-    size = Column(String(10), nullable=True)
     main_genre = Column(Text, nullable=True)
     sous_genre = Column(Text, nullable=True)
     goodreads_url = Column(Text, nullable=True)
@@ -370,7 +376,6 @@ class Copy(Base):
     copy_number = Column(Integer, nullable=False, default=1)
     internal_sku = Column(Text, nullable=True)
     location = Column(String(20), nullable=True)
-    condition = Column(Text, nullable=True)
     borrower_name = Column(Text, nullable=True)
     lent_date = Column(Date, nullable=True)
     notes = Column(Text, nullable=True)
@@ -433,6 +438,24 @@ class DataQualityFlag(Base):
     status = Column(String(20), nullable=False, default=FlagStatus.OPEN.value)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     resolved_at = Column(DateTime, nullable=True)
+
+
+class ScrapeLog(Base):
+    __tablename__ = "scrape_log"
+
+    id = Column(String(36), primary_key=True, default=_uuid)
+    artifact_id = Column(String(36), ForeignKey("artifacts.artifact_id"), nullable=False)
+    attempted_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    source = Column(String(40), nullable=False)       # openlibrary, google_books, comicvine_id, comicvine_search
+    query = Column(Text, nullable=True)                # ISBN, CV ID, or search term used
+    status = Column(String(20), nullable=False)        # success, no_image, api_error, rate_limited, timeout
+    error_detail = Column(Text, nullable=True)
+    image_url = Column(Text, nullable=True)            # URL that yielded the image (if success)
+
+    __table_args__ = (
+        Index("ix_scrape_log_artifact", "artifact_id"),
+        Index("ix_scrape_log_source_status", "source", "status"),
+    )
 
 
 # ---------------------------------------------------------------------------

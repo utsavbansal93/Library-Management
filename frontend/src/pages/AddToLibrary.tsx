@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { createArtifact } from '../api/artifacts';
+import { createArtifact, createCopy } from '../api/artifacts';
 import { ARTIFACT_FORMATS, LOCATIONS, OWNERS } from '../types';
 import type { ArtifactCreate } from '../types';
 
@@ -56,31 +56,38 @@ export default function AddToLibrary() {
     format: string;
     publisher: string | null;
     edition_year: number | null;
-    size: string | null;
     location: string | null;
-    condition: string | null;
     owner: string | undefined;
     isbn_or_upc: string | null;
+    main_genre: string | null;
+    sous_genre: string | null;
     notes: string | null;
   }
 
+  const defaultLocation = localStorage.getItem('alexandria-default-location');
   const [form, setForm] = useState<FormState>({
     title: '',
     format: '',
     publisher: null,
     edition_year: null,
-    size: null,
-    location: null,
-    condition: null,
+    location: defaultLocation || null,
     owner: undefined,
     isbn_or_upc: null,
+    main_genre: null,
+    sous_genre: null,
     notes: null,
   });
 
   const mutation = useMutation({
-    mutationFn: (data: FormState) => {
-      const { location: _loc, condition: _cond, ...artifactData } = data;
-      return createArtifact(artifactData as ArtifactCreate);
+    mutationFn: async (data: FormState) => {
+      const { location, ...artifactData } = data;
+      const artifact = await createArtifact(artifactData as ArtifactCreate);
+      // Create the first copy with the chosen location
+      await createCopy(artifact.artifact_id, {
+        copy_number: 1,
+        location: location ?? undefined,
+      });
+      return artifact;
     },
     onSuccess: (result) => {
       submitGuard.current = false;
@@ -98,11 +105,17 @@ export default function AddToLibrary() {
     [],
   );
 
+  const [showValidation, setShowValidation] = useState(false);
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (submitGuard.current) return;
-    if (!form.title.trim() || !form.format) return;
+    if (!form.title.trim() || !form.format) {
+      setShowValidation(true);
+      return;
+    }
     submitGuard.current = true;
+    setShowValidation(false);
     mutation.mutate(form);
   }
 
@@ -123,8 +136,11 @@ export default function AddToLibrary() {
               value={form.title}
               onChange={(e) => updateField('title', e.target.value)}
               placeholder="Enter artifact title"
-              className="mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className={`mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30 ${showValidation && !form.title.trim() ? 'ring-2 ring-error' : ''}`}
             />
+            {showValidation && !form.title.trim() && (
+              <p className="mt-1 font-body text-xs text-error">Title is required.</p>
+            )}
           </div>
           <div>
             <FieldLabel>Format *</FieldLabel>
@@ -132,7 +148,7 @@ export default function AddToLibrary() {
               required
               value={form.format}
               onChange={(e) => updateField('format', e.target.value)}
-              className="mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className={`mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 ${showValidation && !form.format ? 'ring-2 ring-error' : ''}`}
             >
               <option value="">Select format</option>
               {ARTIFACT_FORMATS.map((f) => (
@@ -141,6 +157,9 @@ export default function AddToLibrary() {
                 </option>
               ))}
             </select>
+            {showValidation && !form.format && (
+              <p className="mt-1 font-body text-xs text-error">Format is required.</p>
+            )}
           </div>
         </div>
 
@@ -173,18 +192,6 @@ export default function AddToLibrary() {
 
           <CollapsibleSection title="Physical Details">
             <div>
-              <FieldLabel>Size</FieldLabel>
-              <select
-                value={form.size ?? ''}
-                onChange={(e) => updateField('size', e.target.value || null)}
-                className="mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30"
-              >
-                <option value="">Select size</option>
-                <option value="Large">Large</option>
-                <option value="Small">Small</option>
-              </select>
-            </div>
-            <div>
               <FieldLabel>Location</FieldLabel>
               <select
                 value={form.location ?? ''}
@@ -198,16 +205,6 @@ export default function AddToLibrary() {
                   </option>
                 ))}
               </select>
-            </div>
-            <div>
-              <FieldLabel>Condition</FieldLabel>
-              <input
-                type="text"
-                value={form.condition ?? ''}
-                onChange={(e) => updateField('condition', e.target.value || null)}
-                placeholder="e.g. Near Mint, Good"
-                className="mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
             </div>
           </CollapsibleSection>
 
@@ -226,6 +223,29 @@ export default function AddToLibrary() {
                   </option>
                 ))}
               </select>
+            </div>
+          </CollapsibleSection>
+
+          <CollapsibleSection title="Genre">
+            <div>
+              <FieldLabel>Main Genre</FieldLabel>
+              <input
+                type="text"
+                value={form.main_genre ?? ''}
+                onChange={(e) => updateField('main_genre', e.target.value || null)}
+                placeholder="e.g. Superhero, Fantasy, History"
+                className="mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30"
+              />
+            </div>
+            <div>
+              <FieldLabel>Sub-Genre</FieldLabel>
+              <input
+                type="text"
+                value={form.sous_genre ?? ''}
+                onChange={(e) => updateField('sous_genre', e.target.value || null)}
+                placeholder="e.g. Dark Knight, Epic Fantasy"
+                className="mt-1 w-full rounded-xl bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/30"
+              />
             </div>
           </CollapsibleSection>
 
@@ -273,7 +293,7 @@ export default function AddToLibrary() {
             disabled={mutation.isPending || !form.title.trim() || !form.format}
             className="rounded-xl bg-primary px-6 py-3 font-body text-sm font-medium text-on-primary transition-opacity hover:opacity-90 disabled:opacity-50"
           >
-            {mutation.isPending ? 'Saving...' : 'Commit to Library'}
+            {mutation.isPending ? 'Saving...' : 'Add to Library'}
           </button>
           <button
             type="button"

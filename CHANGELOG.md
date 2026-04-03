@@ -1,5 +1,118 @@
 # Changelog
 
+## [0.9.0] - 2026-04-03
+
+### P0 Critical Bug Fixes (23 fixed, 2 skipped)
+- **Backend**: Added WAL mode + 15s timeout to SQLite engine for concurrency safety
+- **Backend**: Removed 11+ duplicate `deleted_at.is_(None)` filters — global session event handles soft-delete filtering
+- **Backend**: Added `volume_run_id` query param to `GET /artifacts` + `GET /works/{id}/cover` endpoint
+- **Backend**: Enriched `CreatorRoleBrief` with `target_type`, `target_id`, `target_title` for correct creator detail links
+- **Frontend**: Wired sidebar "Add to Library" button navigation
+- **Frontend**: Add flow now creates Copy with location (previously discarded location, created no copy)
+- **Frontend**: Pre-fills default location from Settings on Add form
+- **Frontend**: Fixed NovelsBrowse + NonFictionBrowse crashes (hooks-in-loop → shared FormatBrowse component)
+- **Frontend**: Fixed MagazinesBrowse pagination envelope unwrapping
+- **Frontend**: Added pagination to ComicsBrowse tabs
+- **Frontend**: Fixed ArtifactDetail edit form — added inputs for edition_year, ISBN, genre, reprint, original_publisher, goodreads_url
+- **Frontend**: All copies now editable (was only copy #1), with format-aware location validation
+- **Frontend**: Fixed volume run links (template literal bug + wrong route)
+- **Frontend**: Fixed CreatorDetail links (was using creator_id, now uses target_id with correct entity type routing)
+- **Frontend**: Fixed story arc timeline covers (404s → new `workId` prop on CoverImage + backend cover endpoint)
+- **Frontend**: Fixed WorkDetail reading status (wrong event_type filter → correct enum values)
+- **Frontend**: Fixed ReviewQueue flag type style keys to match DB enum values
+- **Frontend**: Added theme toggle support (reads localStorage, applies dark class, listens for changes)
+- **Frontend**: Added BackButton component to all detail pages
+- **Frontend**: Added responsive overflow handling to TopNav
+
+### P1 High Friction Fixes (18 fixed)
+- **Frontend**: Added filter dropdowns (Format, Owner, Location) + Clear Filters button to MyLibrary
+- **Frontend**: Added "Showing X–Y of Z" pagination count to MyLibrary
+- **Frontend**: Added truncation warning to search results when hitting 20-per-type cap
+- **Frontend**: StoriesBrowse now has search filter + Collections tab alongside Story Arcs
+- **Frontend**: Added "Add Copy" button on Artifact Detail
+- **Frontend**: Added Lend flow UI (borrower name + date fields when location is "Lent")
+- **Frontend**: WorkDetail now has edit mode (title, type, year, URLs, notes) + Save/Cancel
+- **Frontend**: Added reading activity buttons on WorkDetail (Start Reading, Finished, DNF, Re-read)
+- **Backend**: CollectionDetail now includes `artifact_count` per work for accurate progress bar
+- **Frontend**: Fixed CollectionDetail progress bar (was always 100%, now shows actual owned/total)
+- **Frontend**: Added Enter hint (↵) to search placeholder
+- **Frontend**: Profile dropdown shows checkmark on active profile + 2-char avatar to distinguish U/U
+- **Backend**: Added `is_reprint` to ArtifactSummary schema
+- **Frontend**: Reprint badge shown on grid view cards
+- **Frontend**: CoverImage now supports `version` prop for cache-busting after edits
+
+### P2 UX/UI Improvements (20+ addressed)
+- **Frontend**: Fixed delete dialog text ("will remove from library" instead of "cannot be undone")
+- **Frontend**: Fixed delete toast ("removed from library" instead of "deleted recursively")
+- **Frontend**: Changed "Commit to Library" → "Add to Library" button label
+- **Frontend**: Added Genre fields (main_genre, sous_genre) to Add form
+- **Frontend**: Added visual validation errors on Add form (red ring + error text on empty required fields)
+- **Frontend**: Added edit mode visual banner on ArtifactDetail
+- **Frontend**: Fixed format badge wrapping in list view (whitespace-nowrap)
+- **Frontend**: Made list view more compact (smaller cover thumbnails, tighter padding)
+- **Frontend**: Added title tooltip on truncated titles in grid and list views
+- **Frontend**: Fixed StoryArcTimeline background to match app consistency
+- **Frontend**: Removed dark theme "work in progress" notice (theme toggle is functional)
+- **Frontend**: Settings theme change now dispatches storage event for same-tab reactivity
+- **Frontend**: MagazinesBrowse refactored to use shared FormatBrowse with pagination
+- **Frontend**: Sequence numbers display cleanly (integer vs decimal formatting)
+- **Frontend**: "Various" creator shown in italic style
+- **Frontend**: Enhanced card hover animations (shadow lift)
+- **Frontend**: Removed unused `size` prop from CoverImage callers
+- **Scripts**: Added `fix_orphaned_artifacts.py` and `fix_unparsed_collects.py` data fix scripts
+
+### P2 Remaining Items (15 addressed)
+- **Frontend**: Toast notifications now appear bottom-center instead of bottom-right
+- **Frontend**: Delete confirmation modal uses glassmorphism (backdrop blur + translucent background)
+- **Frontend**: Subject tags editing via pill-based TagInput component in WorkDetail edit mode
+- **Frontend**: Arc missing cards show "Batman #3" instead of "Position 3" when arc is volume-run-based
+- **Frontend**: Large arcs (>15 items) collapse into groups of 10 with expand/collapse toggles
+- **Backend**: Category-specific placeholder SVG colors (comics=blue, magazines=red, novels=green)
+- **Frontend**: CoverImage fallback icons use matching format-specific background colors
+- **Frontend**: Reprint badge shows original publisher name when available
+- **Frontend**: Lent badge shown on grid cards when any copy has location "Lent"
+- **Backend**: Added `POST /artifacts/{id}/cover` endpoint for cover image uploads (JPEG, PNG, WebP)
+- **Frontend**: Drag-and-drop cover upload zone on ArtifactDetail in edit mode
+- **Backend**: Installed `python-multipart` dependency for file upload support
+- **Scripts**: Added `find_duplicate_arcs.py` — read-only script to detect duplicate arc names
+- **Scripts**: Added `fix_typos.py` — fixes known data typos (e.g. "Bood Debt" → "Blood Debt")
+
+## [0.8.1] - 2026-04-03
+
+### Added
+- `scrape_log` table to audit all cover scrape attempts (source, query, status, error detail, image URL)
+- `ScrapeLog` model in `models.py` with indexes on `artifact_id` and `(source, status)`
+- Reusable `scrape_covers.py` script supporting OpenLibrary, Google Books, and ComicVine APIs
+  - CLI flags: `--source`, `--dry-run`, `--limit`, `--backfill-manifest`
+  - Rate limiting (2s ComicVine, 1s others), retry logic for transient failures
+  - Persists discovered ComicVine volume URLs to `volume_runs.comicvine_url` with `scraped:comicvine` provenance
+
+### Changed
+- Backfilled 1,062 existing manifest entries into `scrape_log` for audit continuity
+
+## [0.7.1] - 2026-04-03
+
+### Fixed
+- Backend: Added `PUT /artifacts/{id}/copies/{id}` endpoint to allow correct updating of Physical Copies without mutating the parent Artifact Owner.
+- Security: Added `max_length` properties to Pydantic schemas in `schemas/artifacts.py` to prevent string bounds overflow (D-IMPL-021).
+
+## [0.8.0] - 2026-04-03
+
+### Changed (UI/UX Overhaul & Architecture Remediation)
+- **Layout Density**: Scaled down typography across `ArtifactDetail`, `WorkDetail`, and `MyLibrary` (e.g., text-5xl to text-4xl) and tightened paddings to establish a more premium, dense "Master Ledger" feel.
+- **Left Nav Navigation**: Refactored `AppShell` Sidebar to use absolute `navigate('/')` instead of query-appending `useSearchParams`, fixing phantom routing bugs on detail pages.
+- **Global Toast Notifications**: Implemented `ToastProvider` and `useToast` hook for consistent user feedback after mutating data.
+- **Mobile Parity**: Added a collapsible search icon overlay for mobile viewports `<sm` in `TopNav`.
+- **Title Editing UX**: Swapped the fixed `<input>` tag on the artifact detail page for an auto-resizing `<textarea>` to fix painful string clipping on long titles.
+- **Z-Index Fixes**: Patched z-index stacking collisions where the search bar and profile dropdown were rendering behind the main layout.
+
+### Added
+- `Settings.tsx` page to manage basic preferences, natively persisting via LocalStorage to avoid database bloat.
+- `StoriesBrowse.tsx` created as a dedicated mount point to separate TopNav story discovery from Comics.
+
+### Removed
+- Removed the `Size` attribute from the Artifact entity (both DB and models) and the `Condition` attribute from the Copy entity per user request to simplify UI/UX.
+
 ## [0.7.0] - 2026-04-03
 
 ### Added (Frontend — Phase 1E Complete)

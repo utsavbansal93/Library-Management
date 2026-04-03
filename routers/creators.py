@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from database import get_db
-from models import Creator, CreatorRole, TargetType, _uuid
+from models import Creator, CreatorRole, TargetType, Work, Artifact, _uuid
 from schemas.creators import (
     CreatorCreate, CreatorUpdate, CreatorSummary, CreatorDetail,
     CreatorMergeRequest, CreatorMergeResponse,
@@ -37,7 +37,17 @@ def get_creator(creator_id: str, db: Session = Depends(get_db)):
     creator = db.query(Creator).filter(Creator.creator_id == creator_id).first()
     if not creator:
         raise HTTPException(404, "Creator not found")
-    return creator
+
+    result = CreatorDetail.model_validate(creator)
+    # Enrich roles with target titles
+    for role in result.roles:
+        if role.target_type == TargetType.WORK.value:
+            work = db.query(Work).filter(Work.work_id == role.target_id).first()
+            role.target_title = work.title if work else None
+        elif role.target_type == TargetType.ARTIFACT.value:
+            artifact = db.query(Artifact).filter(Artifact.artifact_id == role.target_id).first()
+            role.target_title = artifact.title if artifact else None
+    return result
 
 
 @router.post("/creators", response_model=CreatorSummary, status_code=201)

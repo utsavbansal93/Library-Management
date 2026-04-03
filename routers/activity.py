@@ -19,7 +19,6 @@ def log_activity(body: ActivityCreate, db: Session = Depends(get_db)):
     # Verify work exists
     work = db.query(Work).filter(
         Work.work_id == body.work_id,
-        Work.deleted_at.is_(None),
     ).first()
     if not work:
         raise HTTPException(404, "Work not found")
