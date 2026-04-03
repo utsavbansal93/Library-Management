@@ -46,3 +46,19 @@ for router_module in (
 
 if COVER_DIR.is_dir():
     app.mount("/covers", StaticFiles(directory=str(COVER_DIR)), name="covers")
+
+# --- Serve built frontend (production) ---
+FRONTEND_DIST = Path(__file__).parent / "frontend" / "dist"
+if FRONTEND_DIST.is_dir():
+    from fastapi.responses import FileResponse
+
+    # Serve static assets (JS, CSS, images) from Vite build
+    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="frontend-assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        """Serve the SPA index.html for all non-API routes."""
+        file_path = FRONTEND_DIST / full_path
+        if full_path and file_path.is_file():
+            return FileResponse(str(file_path))
+        return FileResponse(str(FRONTEND_DIST / "index.html"))
